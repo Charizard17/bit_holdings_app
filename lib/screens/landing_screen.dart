@@ -1,0 +1,71 @@
+import 'package:flutter/material.dart';
+
+class LandingScreen extends StatelessWidget {
+  const LandingScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 70),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(left: 50),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Create your portfolio',
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                    SizedBox(height: 10,),
+                    Text(
+                      'Explore new market pairs',
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                    SizedBox(height: 10,),
+                    Text(
+                      'Follow latest news',
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            MaterialButton(
+              color: Theme.of(context).primaryColor,
+              child: Text(
+                'Get Started',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {},
+            ),
+            SizedBox(height: 30),
+            MaterialButton(
+              color: Theme.of(context).primaryColor,
+              child: Text(
+                'Sign in with Google',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
