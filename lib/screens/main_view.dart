@@ -1,4 +1,7 @@
+import 'package:crypto_portfolio_tracker/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'screens.dart';
 
 class MainView extends StatefulWidget {
   const MainView({Key? key}) : super(key: key);
@@ -10,9 +13,7 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   int _selectedIndex = 0;
   static const List<Widget> _screenList = [
-    Center(
-      child: Text('Home Screen'),
-    ),
+    HomeScreen(),
     Center(
       child: Text('Portfolio Screen'),
     ),
