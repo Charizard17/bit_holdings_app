@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+class MainView extends StatefulWidget {
+  const MainView({Key? key}) : super(key: key);
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<MainView> createState() => _MainViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _MainViewState extends State<MainView> {
   int _selectedIndex = 0;
   static const List<Widget> _screenList = [
     Center(

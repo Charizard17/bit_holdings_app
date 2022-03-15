@@ -1,2 +1,2 @@
 import 'landing_screen.dart';
-import 'home_view.dart';
+import 'main_view.dart';

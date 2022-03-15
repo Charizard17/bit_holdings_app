@@ -1,4 +1,4 @@
-import 'package:crypto_portfolio_tracker/screens/home_view.dart';
+import 'package:crypto_portfolio_tracker/screens/main_view.dart';
 import 'package:crypto_portfolio_tracker/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: HomeView(),
+      home: MainView(),
     );
   }
 }
