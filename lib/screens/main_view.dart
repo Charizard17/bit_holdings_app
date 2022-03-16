@@ -1,4 +1,5 @@
 import 'package:crypto_portfolio_tracker/screens/home_screen.dart';
+import 'package:crypto_portfolio_tracker/screens/portfolio_screen.dart';
 import 'package:crypto_portfolio_tracker/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,9 +16,7 @@ class _MainViewState extends State<MainView> {
   int _selectedIndex = 0;
   static const List<Widget> _screenList = [
     HomeScreen(),
-    Center(
-      child: Text('Portfolio Screen'),
-    ),
+    PortfolioScreen(),
     SettingsScreen(),
   ];
   @override

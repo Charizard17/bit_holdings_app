@@ -7,7 +7,8 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: double.infinity,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.symmetric(vertical: 70),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
