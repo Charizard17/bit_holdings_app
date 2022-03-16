@@ -28,36 +28,50 @@ class PortfolioScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Portfolio',
-                      style: Theme.of(context).textTheme.headline5,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Portfolio',
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text('Change'),
+                            Text(
+                              '%126.15',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                     SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Holding Value'),
-                        Text('Change'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '\$14,700.07',
-                          style: Theme.of(context).textTheme.headline6,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Invested Amount'),
+                            Text(
+                              '\$6,500.00',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         ),
-                        Text(
-                          '%126.15',
-                          style: Theme.of(context).textTheme.headline6,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text('Holding Value'),
+                            Text(
+                              '\$14,700.07',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-                    SizedBox(height: 10),
-                    Text('Invested Amount'),
-                    Text(
-                      '\$6,500.00',
-                      style: Theme.of(context).textTheme.headline6,
                     ),
                   ],
                 ),
@@ -93,7 +107,7 @@ class PortfolioScreen extends StatelessWidget {
               ),
               Divider(color: Colors.white),
               Container(
-                height: 300,
+                height: 350,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -138,11 +152,27 @@ class PortfolioScreen extends StatelessWidget {
                       ),
                       Divider(color: Colors.white),
                       AssetListTile(
+                        name: 'Dogecoin',
+                        symbol: 'DOGE',
+                        iconColor: Colors.yellowAccent,
+                        profitLossPercent: '%-20.00',
+                        profitLossColor: Colors.red,
+                      ),
+                      Divider(color: Colors.white),
+                      AssetListTile(
                         name: 'Waves',
                         symbol: 'Waves',
                         iconColor: Colors.blueAccent,
                         profitLossPercent: '%-2.50',
                         profitLossColor: Colors.red,
+                      ),
+                      Divider(color: Colors.white),
+                      AssetListTile(
+                        name: 'x8currency',
+                        symbol: 'X8X',
+                        iconColor: Colors.yellow,
+                        profitLossPercent: '%60.50',
+                        profitLossColor: Colors.green,
                       ),
                     ],
                   ),
