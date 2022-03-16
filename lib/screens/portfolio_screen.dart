@@ -1,4 +1,7 @@
+import 'package:crypto_portfolio_tracker/widgets/asset_list_tile.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/widgets.dart';
 
 class PortfolioScreen extends StatelessWidget {
   const PortfolioScreen({Key? key}) : super(key: key);
@@ -57,6 +60,92 @@ class PortfolioScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline6,
                     ),
                   ],
+                ),
+              ),
+              SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Your Assets',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0XFF59B5B2),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: Icon(
+                      Icons.add,
+                      size: 30,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Coin'),
+                  Text('Holdings'),
+                  Text('Profit/Loss'),
+                ],
+              ),
+              Divider(color: Colors.white),
+              Container(
+                height: 300,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      AssetListTile(
+                        name: 'Bitcoin',
+                        symbol: 'BTC',
+                        iconColor: Colors.orangeAccent,
+                        profitLossPercent: '%1.05',
+                        profitLossColor: Colors.green,
+                      ),
+                      Divider(color: Colors.white),
+                      AssetListTile(
+                        name: 'Ethereum',
+                        symbol: 'ETH',
+                        iconColor: Colors.blue,
+                        profitLossPercent: '%-1.05',
+                        profitLossColor: Colors.red,
+                      ),
+                      Divider(color: Colors.white),
+                      AssetListTile(
+                        name: 'Litecoin',
+                        symbol: 'LTC',
+                        iconColor: Colors.grey,
+                        profitLossPercent: '%5.67',
+                        profitLossColor: Colors.green,
+                      ),
+                      Divider(color: Colors.white),
+                      AssetListTile(
+                        name: 'XRP',
+                        symbol: 'XRP',
+                        iconColor: Colors.black54,
+                        profitLossPercent: '%-7.14',
+                        profitLossColor: Colors.red,
+                      ),
+                      Divider(color: Colors.white),
+                      AssetListTile(
+                        name: 'PAXG',
+                        symbol: 'PAXG',
+                        iconColor: Colors.orange,
+                        profitLossPercent: '%+17.14',
+                        profitLossColor: Colors.green,
+                      ),
+                      Divider(color: Colors.white),
+                      AssetListTile(
+                        name: 'Waves',
+                        symbol: 'Waves',
+                        iconColor: Colors.blueAccent,
+                        profitLossPercent: '%-2.50',
+                        profitLossColor: Colors.red,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
