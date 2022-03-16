@@ -1,6 +1,9 @@
-import 'package:crypto_portfolio_tracker/widgets/asset_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:animations/animations.dart';
 
+import '../widgets/asset_list_tile.dart';
+import 'add_coin_screen.dart';
+import 'screens.dart';
 import '../widgets/widgets.dart';
 
 class PortfolioScreen extends StatelessWidget {
@@ -84,14 +87,27 @@ class PortfolioScreen extends StatelessWidget {
                     'Your Assets',
                     style: Theme.of(context).textTheme.headline6,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color(0XFF59B5B2),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Icon(
-                      Icons.add,
-                      size: 30,
+                  SizedBox(
+                    width: 35,
+                    height: 35,
+                    child: OpenContainer(
+                      transitionType: ContainerTransitionType.fadeThrough,
+                      closedColor: Colors.transparent,
+                      closedElevation: 0.0,
+                      openElevation: 4.0,
+                      transitionDuration: Duration(milliseconds: 1000),
+                      openBuilder: (BuildContext context, VoidCallback closeContainer) =>
+                          AddCoinScreen(),
+                      closedBuilder:
+                          (BuildContext _, VoidCallback openContainer) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Color(0XFF59B5B2),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Icon(Icons.add),
+                        );
+                      },
                     ),
                   ),
                 ],
