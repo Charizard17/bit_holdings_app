@@ -8,6 +8,7 @@ class AddCoinScreen extends StatefulWidget {
 }
 
 class _AddCoinScreenState extends State<AddCoinScreen> {
+  TextEditingController _quantity = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
@@ -61,10 +62,46 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Transaction Date:'),
+                    Text(
+                      'Quantity:',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    Container(
+                      width: 100,
+                      child: TextFormField(
+                        controller: _quantity,
+                        decoration: InputDecoration(
+                          hintText: '0.00',
+                          hintStyle: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Transaction Date:',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
                     OutlinedButton(
                       child: Text(
-                          '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}'),
+                        '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
                       onPressed: () {
                         _selectDate(context);
                       },
