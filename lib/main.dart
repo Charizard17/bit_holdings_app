@@ -1,7 +1,6 @@
-import 'package:crypto_portfolio_tracker/screens/main_view.dart';
-import 'package:crypto_portfolio_tracker/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'screens/main_view.dart';
 import 'screens/screens.dart';
 
 void main() {
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Crypto Portfolio Tracker',
+      title: 'BitHoldings App',
       theme: ThemeData.dark().copyWith(
         primaryColor: Color(0XFF59B5B2),
         textTheme: TextTheme(

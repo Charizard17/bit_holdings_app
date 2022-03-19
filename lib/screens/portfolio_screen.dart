@@ -3,8 +3,6 @@ import 'package:animations/animations.dart';
 
 import '../widgets/asset_list_tile.dart';
 import 'add_coin_screen.dart';
-import 'screens.dart';
-import '../widgets/widgets.dart';
 
 class PortfolioScreen extends StatelessWidget {
   const PortfolioScreen({Key? key}) : super(key: key);

@@ -1,4 +1,4 @@
-package com.example.crypto_portfolio_tracker
+package com.charilab.bit_holdings_app
 
 import io.flutter.embedding.android.FlutterActivity
 

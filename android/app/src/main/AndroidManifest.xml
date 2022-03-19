@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.crypto_portfolio_tracker">
+    package="com.charilab.bit_holdings_app">
    <application
-        android:label="crypto_portfolio_tracker"
+        android:label="BitHoldings"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

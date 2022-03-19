@@ -1,7 +1,6 @@
-import 'package:crypto_portfolio_tracker/widgets/news_card_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/widgets.dart';
+import '../widgets/news_card_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

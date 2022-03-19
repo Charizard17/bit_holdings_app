@@ -1,3 +1,3 @@
-# crypto_portfolio_tracker
+# bit_holdings_app
 
 A new Flutter project.

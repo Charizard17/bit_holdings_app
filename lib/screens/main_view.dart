@@ -1,9 +1,8 @@
-import 'package:crypto_portfolio_tracker/screens/home_screen.dart';
-import 'package:crypto_portfolio_tracker/screens/portfolio_screen.dart';
-import 'package:crypto_portfolio_tracker/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'screens.dart';
+import 'home_screen.dart';
+import 'portfolio_screen.dart';
+import 'settings_screen.dart';
 
 class MainView extends StatefulWidget {
   const MainView({Key? key}) : super(key: key);
