@@ -9,6 +9,7 @@ class AddCoinScreen extends StatefulWidget {
 
 class _AddCoinScreenState extends State<AddCoinScreen> {
   TextEditingController _quantity = TextEditingController();
+  TextEditingController _buyPrice = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,32 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                       Icons.arrow_forward_rounded,
                       size: 35,
                       color: Colors.transparent,
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Price per coin:',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    Container(
+                      width: 100,
+                      child: TextFormField(
+                        controller: _buyPrice,
+                        decoration: InputDecoration(
+                          hintText: '\$40,000.00',
+                          hintStyle: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                     )
                   ],
                 ),
