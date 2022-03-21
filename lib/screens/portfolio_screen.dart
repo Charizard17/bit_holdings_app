@@ -145,11 +145,28 @@ class PortfolioScreen extends StatelessWidget {
                       shrinkWrap: true,
                       children: snapshot.data!.docs.map((document) {
                         return Container(
+                          padding: EdgeInsets.symmetric(vertical: 10,),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Coin: ${document.id}'),
-                              Text('Quantity: ${document["Quantity"]}'),
+                              Text(
+                                '${document.id}',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              Text(
+                                '${document["Quantity"]}',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              Text(
+                                'Price: ${document["Price"]}',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
                             ],
                           ),
                         );

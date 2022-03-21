@@ -1,3 +1,4 @@
+import 'package:bit_holdings_app/models/flutterfire.dart';
 import 'package:flutter/material.dart';
 
 class AddCoinScreen extends StatefulWidget {
@@ -173,7 +174,8 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                     ),
                   ),
                   onPressed: () async {
-                    // TODO
+                    await addCoin(_coin.text, _quantity.text, _buyPrice.text,
+                        _selectedDate.toString());
                     Navigator.of(context).pop();
                   },
                 ),
