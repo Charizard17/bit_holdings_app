@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 
@@ -94,8 +96,9 @@ class PortfolioScreen extends StatelessWidget {
                       closedElevation: 0.0,
                       openElevation: 4.0,
                       transitionDuration: Duration(milliseconds: 1000),
-                      openBuilder: (BuildContext context, VoidCallback closeContainer) =>
-                          AddCoinScreen(),
+                      openBuilder:
+                          (BuildContext context, VoidCallback closeContainer) =>
+                              AddCoinScreen(),
                       closedBuilder:
                           (BuildContext _, VoidCallback openContainer) {
                         return Container(
@@ -121,75 +124,38 @@ class PortfolioScreen extends StatelessWidget {
               ),
               Divider(color: Colors.white),
               Container(
-                height: 350,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      AssetListTile(
-                        name: 'Bitcoin',
-                        symbol: 'BTC',
-                        iconColor: Colors.orangeAccent,
-                        profitLossPercent: '%1.05',
-                        profitLossColor: Colors.green,
-                      ),
-                      Divider(color: Colors.white),
-                      AssetListTile(
-                        name: 'Ethereum',
-                        symbol: 'ETH',
-                        iconColor: Colors.blue,
-                        profitLossPercent: '%-1.05',
-                        profitLossColor: Colors.red,
-                      ),
-                      Divider(color: Colors.white),
-                      AssetListTile(
-                        name: 'Litecoin',
-                        symbol: 'LTC',
-                        iconColor: Colors.grey,
-                        profitLossPercent: '%5.67',
-                        profitLossColor: Colors.green,
-                      ),
-                      Divider(color: Colors.white),
-                      AssetListTile(
-                        name: 'XRP',
-                        symbol: 'XRP',
-                        iconColor: Colors.black54,
-                        profitLossPercent: '%-7.14',
-                        profitLossColor: Colors.red,
-                      ),
-                      Divider(color: Colors.white),
-                      AssetListTile(
-                        name: 'PAXG',
-                        symbol: 'PAXG',
-                        iconColor: Colors.orange,
-                        profitLossPercent: '%+17.14',
-                        profitLossColor: Colors.green,
-                      ),
-                      Divider(color: Colors.white),
-                      AssetListTile(
-                        name: 'Dogecoin',
-                        symbol: 'DOGE',
-                        iconColor: Colors.yellowAccent,
-                        profitLossPercent: '%-20.00',
-                        profitLossColor: Colors.red,
-                      ),
-                      Divider(color: Colors.white),
-                      AssetListTile(
-                        name: 'Waves',
-                        symbol: 'Waves',
-                        iconColor: Colors.blueAccent,
-                        profitLossPercent: '%-2.50',
-                        profitLossColor: Colors.red,
-                      ),
-                      Divider(color: Colors.white),
-                      AssetListTile(
-                        name: 'x8currency',
-                        symbol: 'X8X',
-                        iconColor: Colors.yellow,
-                        profitLossPercent: '%60.50',
-                        profitLossColor: Colors.green,
-                      ),
-                    ],
-                  ),
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('Users')
+                      .doc(FirebaseAuth.instance.currentUser?.uid)
+                      .collection('Coins')
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      );
+                    }
+
+                    return ListView(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      children: snapshot.data!.docs.map((document) {
+                        return Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text('Coin: ${document.id}'),
+                              Text('Quantity: ${document["Quantity"]}'),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  },
                 ),
               ),
             ],

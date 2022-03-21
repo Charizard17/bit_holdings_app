@@ -8,8 +8,9 @@ class AddCoinScreen extends StatefulWidget {
 }
 
 class _AddCoinScreenState extends State<AddCoinScreen> {
-  TextEditingController _quantity = TextEditingController();
+  TextEditingController _coin = TextEditingController();
   TextEditingController _buyPrice = TextEditingController();
+  TextEditingController _quantity = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
@@ -64,6 +65,32 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
+                      'Coin:',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    Container(
+                      width: 100,
+                      child: TextFormField(
+                        controller: _coin,
+                        decoration: InputDecoration(
+                          hintText: 'Bitcoin',
+                          hintStyle: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
                       'Price per coin:',
                       style: TextStyle(
                         fontSize: 16,
@@ -74,7 +101,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                       child: TextFormField(
                         controller: _buyPrice,
                         decoration: InputDecoration(
-                          hintText: '\$40,000.00',
+                          hintText: '\$1,000.00',
                           hintStyle: TextStyle(
                             color: Colors.white,
                           ),
@@ -100,7 +127,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                       child: TextFormField(
                         controller: _quantity,
                         decoration: InputDecoration(
-                          hintText: '0.00',
+                          hintText: '0.35',
                           hintStyle: TextStyle(
                             color: Colors.white,
                           ),
@@ -134,6 +161,21 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                       },
                     ),
                   ],
+                ),
+                MaterialButton(
+                  color: Theme.of(context).primaryColor,
+                  child: Text(
+                    'Add',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onPressed: () async {
+                    // TODO
+                    Navigator.of(context).pop();
+                  },
                 ),
               ],
             ),
