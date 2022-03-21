@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'sign_in_screen.dart';
+
 class LandingScreen extends StatelessWidget {
   const LandingScreen({Key? key}) : super(key: key);
 
@@ -25,12 +27,16 @@ class LandingScreen extends StatelessWidget {
                       'Create your portfolio',
                       style: Theme.of(context).textTheme.headline5,
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Text(
                       'Explore new market pairs',
                       style: Theme.of(context).textTheme.headline5,
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Text(
                       'Follow latest news',
                       style: Theme.of(context).textTheme.headline5,
@@ -49,20 +55,13 @@ class LandingScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              onPressed: () {},
-            ),
-            SizedBox(height: 30),
-            MaterialButton(
-              color: Theme.of(context).primaryColor,
-              child: Text(
-                'Sign in with Google',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const SignInScreen(),
+                  ),
+                );
+              },
             ),
           ],
         ),
