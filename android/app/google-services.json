@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "389775541970",
+    "project_id": "bitholdings-52a88",
+    "storage_bucket": "bitholdings-52a88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389775541970:android:32c4713049f7a9927d4f0b",
+        "android_client_info": {
+          "package_name": "com.charilab.bit_holdings_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389775541970-ncob6sa8edps3kp2meejaivlbrhmnupn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByZJ8EKUZoSXA9VT2HW060HAXuMlRvf5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "389775541970-ncob6sa8edps3kp2meejaivlbrhmnupn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "389775541970-9pprpp0sc5iicjd8f4u6k46njqfdqt1c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.chariLab.bitHoldingsApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
