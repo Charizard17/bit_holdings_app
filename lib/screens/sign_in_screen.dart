@@ -1,6 +1,8 @@
+import 'package:bit_holdings_app/screens/main_view.dart';
 import 'package:flutter/material.dart';
 
 import 'sign_up_screen.dart';
+import '../models/flutterfire.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -24,7 +26,7 @@ class _SignInScreenState extends State<SignInScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Login',
+              'Sign In',
               style: TextStyle(
                 fontSize: 30,
               ),
@@ -64,14 +66,23 @@ class _SignInScreenState extends State<SignInScreen> {
             MaterialButton(
               color: Theme.of(context).primaryColor,
               child: Text(
-                'Login',
+                'Sign In',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                bool shouldNavigate = await signIn(_email.text, _password.text);
+                if (shouldNavigate) {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const MainView(),
+                    ),
+                  );
+                }
+              },
             ),
             SizedBox(height: 20),
             Row(

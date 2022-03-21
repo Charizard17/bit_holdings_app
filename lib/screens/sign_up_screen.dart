@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'sign_in_screen.dart';
+import '../models/flutterfire.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Signup',
+              'Sign Up',
               style: TextStyle(
                 fontSize: 30,
               ),
@@ -71,7 +72,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                bool shouldNavigate =
+                    await signUp(_email.text, _password.text);
+                if (shouldNavigate) {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const SignInScreen(),
+                    ),
+                  );
+                }
+              },
             ),
             SizedBox(height: 20),
             Row(
