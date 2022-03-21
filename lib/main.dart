@@ -1,3 +1,4 @@
+import 'package:bit_holdings_app/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/main_view.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: MainView(),
+      home: LandingScreen(),
     );
   }
 }
