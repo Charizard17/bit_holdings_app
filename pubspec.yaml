@@ -31,6 +31,7 @@ dependencies:
     sdk: flutter
   animations: ^2.0.2
   intl: ^0.17.0
+  http: ^0.13.4
 
   # FlutterFire
   firebase_core: ^1.12.0
