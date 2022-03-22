@@ -2,7 +2,7 @@ import 'package:bit_holdings_app/screens/main_view.dart';
 import 'package:flutter/material.dart';
 
 import 'sign_up_screen.dart';
-import '../models/flutterfire.dart';
+import '../services/flutterfire.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);

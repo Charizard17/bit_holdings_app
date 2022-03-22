@@ -1,5 +1,6 @@
-import 'package:bit_holdings_app/models/flutterfire.dart';
 import 'package:flutter/material.dart';
+
+import '../services/flutterfire.dart';
 
 class AddCoinScreen extends StatefulWidget {
   const AddCoinScreen({Key? key}) : super(key: key);
