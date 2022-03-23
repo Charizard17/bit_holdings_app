@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CoinDataWidget extends StatelessWidget {
+class CoinsListItem extends StatelessWidget {
   final String rank;
   final String name;
   final String symbol;
   final String image;
   final String price;
   final String priceChange24h;
-  const CoinDataWidget({
+  const CoinsListItem({
     Key? key,
     required this.rank,
     required this.name,

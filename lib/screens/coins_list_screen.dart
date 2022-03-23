@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/coin_data_widget.dart';
+import '../widgets/coins_list_item.dart';
 import '../services/api_methods.dart';
 
 class CoinsListScreen extends StatelessWidget {
@@ -80,7 +80,7 @@ class CoinsListScreen extends StatelessWidget {
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
-                        return CoinDataWidget(
+                        return CoinsListItem(
                           rank: snapshot.data[index].rank.toString(),
                           name: snapshot.data[index].name,
                           symbol: snapshot.data[index].symbol,
