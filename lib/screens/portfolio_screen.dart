@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 
-import '../widgets/asset_list_tile.dart';
+import '../services/api_methods.dart';
+import '../widgets/portfolio_list_item.dart';
 import 'add_coin_screen.dart';
 
 class PortfolioScreen extends StatelessWidget {
@@ -85,7 +86,9 @@ class PortfolioScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Your Assets',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
                   SizedBox(
                     width: 35,
@@ -117,11 +120,39 @@ class PortfolioScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Coin'),
-                  Text('Holdings'),
-                  Text('Profit/Loss'),
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      'Coin',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      'Holdings',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      'Profit/Loss',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                      textAlign: TextAlign.right,
+                    ),
+                  ),
                 ],
               ),
+              SizedBox(height: 5),
               Divider(color: Colors.white),
               Container(
                 child: StreamBuilder(
@@ -139,35 +170,18 @@ class PortfolioScreen extends StatelessWidget {
                         ),
                       );
                     }
-
                     return ListView(
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       children: snapshot.data!.docs.map((document) {
                         return Container(
-                          padding: EdgeInsets.symmetric(vertical: 10,),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                '${document.id}',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
-                              ),
-                              Text(
-                                '${document["Quantity"]}',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
-                              ),
-                              Text(
-                                'Price: ${document["Price"]}',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
+                          padding: EdgeInsets.symmetric(
+                            vertical: 10,
+                          ),
+                          child: PortfolioListItem(
+                            name: document.id,
+                            price: document['Price'].toString(),
+                            quantity: document['Quantity'].toString(),
                           ),
                         );
                       }).toList(),

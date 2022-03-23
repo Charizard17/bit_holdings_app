@@ -36,7 +36,7 @@ class CoinDataWidget extends StatelessWidget {
             child: Text(
               rank,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
               ),
             ),
           ),
@@ -55,14 +55,14 @@ class CoinDataWidget extends StatelessWidget {
                 Text(
                   name,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     color: Colors.white,
                   ),
                 ),
                 Text(
                   symbol.toUpperCase(),
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     color: Colors.white60,
                   ),
                 ),
