@@ -17,6 +17,52 @@ class CoinsListScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Text(
+                      '#',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 5,
+                    child: Text(
+                      'Coin',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      '24h %',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      'Price',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 5),
               Expanded(
                 child: FutureBuilder(
                   future: getCoinsList(),
@@ -40,6 +86,7 @@ class CoinsListScreen extends StatelessWidget {
                           symbol: snapshot.data[index].symbol,
                           image: snapshot.data[index].image,
                           price: snapshot.data[index].price,
+                          priceChange24h: snapshot.data[index].priceChange24h,
                         );
                       },
                     );

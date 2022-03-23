@@ -29,7 +29,8 @@ Future<List> getCoinsList() async {
         coin['market_cap_rank'],
         coin['name'],
         coin['symbol'],
-        (coin['current_price']).toString(),
+        coin['current_price'].toString(),
+        double.parse(coin['price_change_percentage_24h'].toString()).toStringAsFixed(2),
         coin['image'],
       );
       coins.add(aCoin);

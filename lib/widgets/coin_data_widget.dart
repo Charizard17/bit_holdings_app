@@ -6,6 +6,7 @@ class CoinDataWidget extends StatelessWidget {
   final String symbol;
   final String image;
   final String price;
+  final String priceChange24h;
   const CoinDataWidget({
     Key? key,
     required this.rank,
@@ -13,6 +14,7 @@ class CoinDataWidget extends StatelessWidget {
     required this.symbol,
     required this.image,
     required this.price,
+    required this.priceChange24h,
   }) : super(key: key);
 
   @override
@@ -29,46 +31,67 @@ class CoinDataWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            rank,
-            style: TextStyle(
-              fontSize: 18,
+          Expanded(
+            flex: 1,
+            child: Text(
+              rank,
+              style: TextStyle(
+                fontSize: 18,
+              ),
             ),
           ),
-          SizedBox(width: 10),
-          Container(
-            child: Row(
+          Expanded(
+            flex: 2,
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(image),
+              radius: 25,
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(image),
-                  radius: 25,
+                Text(
+                  name,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                  ),
                 ),
-                SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      name,
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                    Text(
-                      symbol.toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                  ],
+                Text(
+                  symbol.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white60,
+                  ),
                 ),
               ],
             ),
           ),
-          Expanded(child: Container()),
-          Text(
-            '\$ $price',
-            style: TextStyle(
-              fontSize: 18,
+          Expanded(
+            flex: 2,
+            child: Text(
+              '$priceChange24h%',
+              style: TextStyle(
+                fontSize: 18,
+                color: double.parse(priceChange24h) >= 0
+                    ? Colors.greenAccent
+                    : Colors.redAccent,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                '\$ $price',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.right,
+              ),
             ),
           ),
         ],
