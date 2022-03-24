@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../widgets/coins_list_item.dart';
 import '../services/api_methods.dart';
 
+ApiMethods _apiMethods = ApiMethods();
+
 class CoinsListScreen extends StatelessWidget {
   const CoinsListScreen({Key? key}) : super(key: key);
 
@@ -65,7 +67,7 @@ class CoinsListScreen extends StatelessWidget {
               SizedBox(height: 5),
               Expanded(
                 child: FutureBuilder(
-                  future: getCoinsList(),
+                  future: _apiMethods.getCoinsList(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (!snapshot.hasData) {
                       return Center(

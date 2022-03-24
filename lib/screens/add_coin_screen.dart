@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../services/flutterfire.dart';
 
+FlutterFire _flutterFire = FlutterFire();
+
 class AddCoinScreen extends StatefulWidget {
   const AddCoinScreen({Key? key}) : super(key: key);
 
@@ -63,6 +65,20 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                     )
                   ],
                 ),
+                SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    '1. Search your coin',
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                Divider(
+                  color: Colors.white,
+                  thickness: 1,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -88,6 +104,20 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                       ),
                     )
                   ],
+                ),
+                SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    '2. Fill additional informations',
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                Divider(
+                  color: Colors.white,
+                  thickness: 1,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -164,6 +194,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                     ),
                   ],
                 ),
+                SizedBox(height: 20),
                 MaterialButton(
                   color: Theme.of(context).primaryColor,
                   child: Text(
@@ -175,7 +206,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                     ),
                   ),
                   onPressed: () async {
-                    await addCoin(_coin.text, _quantity.text, _buyPrice.text,
+                    await _flutterFire.addCoin(_coin.text, _quantity.text, _buyPrice.text,
                         _selectedDate.toString());
                     Navigator.of(context).pop();
                   },

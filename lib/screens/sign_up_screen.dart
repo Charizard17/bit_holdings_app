@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'sign_in_screen.dart';
 import '../services/flutterfire.dart';
 
+FlutterFire _flutterFire = FlutterFire();
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
@@ -73,8 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               onPressed: () async {
-                bool shouldNavigate =
-                    await signUp(_email.text, _password.text);
+                bool shouldNavigate = await _flutterFire.signUp(_email.text, _password.text);
                 if (shouldNavigate) {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
