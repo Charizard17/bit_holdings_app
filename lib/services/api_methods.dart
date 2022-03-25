@@ -3,9 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../models/coin.dart';
-import '../data/coins_data.dart';
-
-CoinsData _coinsData = CoinsData();
 
 class ApiMethods {
   Future<double> getPrice(String id) async {
@@ -27,6 +24,7 @@ class ApiMethods {
           'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1');
       var response = await http.get(url);
       var json = jsonDecode(response.body);
+      List<Coin> coinsList = [];
       for (var coin in json) {
         Coin aCoin = Coin(
           coin['market_cap_rank'],
@@ -37,9 +35,9 @@ class ApiMethods {
               .toStringAsFixed(2),
           coin['image'],
         );
-        _coinsData.addCoins(aCoin);
+        coinsList.add(aCoin);
       }
-      return _coinsData.coins;
+      return coinsList;
     } catch (e) {
       print(e.toString());
       return [];
