@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../services/flutterfire.dart';
+import '../services/api_methods.dart';
 
 FlutterFire _flutterFire = FlutterFire();
+ApiMethods _apiMethods = ApiMethods();
 
 class AddCoinScreen extends StatefulWidget {
   const AddCoinScreen({Key? key}) : super(key: key);
@@ -12,10 +14,12 @@ class AddCoinScreen extends StatefulWidget {
 }
 
 class _AddCoinScreenState extends State<AddCoinScreen> {
-  TextEditingController _coin = TextEditingController();
+  bool _coinSelected = false;
+  String _selectedCoinName = '';
   TextEditingController _buyPrice = TextEditingController();
   TextEditingController _quantity = TextEditingController();
   DateTime _selectedDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     Future<void> _selectDate(BuildContext context) async {
@@ -65,152 +69,247 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                     )
                   ],
                 ),
-                SizedBox(height: 20),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    '1. Search your coin',
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
+                SizedBox(height: 10),
+                _coinSelected == false
+                    ? Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Step 1– Select your coin',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      )
+                    : Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Step 2– Fill transaction details',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
                 Divider(
-                  color: Colors.white,
                   thickness: 1,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Coin:',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                    Container(
-                      width: 100,
-                      child: TextFormField(
-                        controller: _coin,
-                        decoration: InputDecoration(
-                          hintText: 'Bitcoin',
-                          hintStyle: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 20),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    '2. Fill additional informations',
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-                Divider(
                   color: Colors.white,
-                  thickness: 1,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Price per coin:',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                    Container(
-                      width: 100,
-                      child: TextFormField(
-                        controller: _buyPrice,
-                        decoration: InputDecoration(
-                          hintText: '\$1,000.00',
-                          hintStyle: TextStyle(
-                            color: Colors.white,
+                SizedBox(height: 10),
+                _coinSelected == false
+                    ? Expanded(
+                        child: FutureBuilder(
+                          future: _apiMethods.getCoinsList(),
+                          builder:
+                              (BuildContext context, AsyncSnapshot snapshot) {
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              );
+                            }
+
+                            return ListView.builder(
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  margin: EdgeInsets.only(bottom: 15),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 10,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[700],
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: GestureDetector(
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: CircleAvatar(
+                                            backgroundColor: Colors.black,
+                                            radius: 20,
+                                            child: ClipOval(
+                                              child: Image.network(
+                                                snapshot.data[index].image,
+                                                fit: BoxFit.cover,
+                                                width: 40,
+                                                height: 40,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(width: 30),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text(
+                                            snapshot.data[index].name,
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            snapshot.data[index].symbol
+                                                .toString()
+                                                .toUpperCase(),
+                                            style: TextStyle(
+                                              color: Colors.white70,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    onTap: () async {
+                                      setState(() {
+                                        this._selectedCoinName =
+                                            snapshot.data[index].name;
+                                      });
+                                      _coinSelected = true;
+                                    },
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      )
+                    : Column(
+                        children: [
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Coin:',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              Text(
+                                _selectedCoinName,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Quantity:',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                    Container(
-                      width: 100,
-                      child: TextFormField(
-                        controller: _quantity,
-                        decoration: InputDecoration(
-                          hintText: '0.35',
-                          hintStyle: TextStyle(
-                            color: Colors.white,
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '*Price per coin:',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              Container(
+                                width: 100,
+                                child: TextField(
+                                  controller: _buyPrice,
+                                  decoration: InputDecoration(
+                                    hintText: '\$1000.00',
+                                    hintStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
-                        ),
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '*Quantity:',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              Container(
+                                width: 100,
+                                child: TextField(
+                                  controller: _quantity,
+                                  decoration: InputDecoration(
+                                    hintText: '0.35',
+                                    hintStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Transaction Date:',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              OutlinedButton(
+                                child: Text(
+                                  '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  _selectDate(context);
+                                },
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          MaterialButton(
+                            color: Theme.of(context).primaryColor,
+                            child: Text(
+                              'Add',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            onPressed: (_quantity.text != '' &&
+                                        _buyPrice.text != '' &&
+                                        double.parse(_quantity.text) *
+                                                double.parse(_buyPrice.text) >
+                                            0) ==
+                                    true
+                                ? () async {
+                                    await _flutterFire.addCoin(
+                                        _selectedCoinName.replaceAll(' ', '-'),
+                                        _quantity.text,
+                                        _buyPrice.text,
+                                        _selectedDate.toString());
+                                    Navigator.of(context).pop();
+                                  }
+                                : () {},
+                          ),
+                        ],
                       ),
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Transaction Date:',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                    OutlinedButton(
-                      child: Text(
-                        '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                      onPressed: () {
-                        _selectDate(context);
-                      },
-                    ),
-                  ],
-                ),
                 SizedBox(height: 20),
-                MaterialButton(
-                  color: Theme.of(context).primaryColor,
-                  child: Text(
-                    'Add',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  onPressed: () async {
-                    await _flutterFire.addCoin(_coin.text, _quantity.text, _buyPrice.text,
-                        _selectedDate.toString());
-                    Navigator.of(context).pop();
-                  },
-                ),
               ],
             ),
           ),

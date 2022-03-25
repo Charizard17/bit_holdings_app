@@ -7,7 +7,8 @@ import '../models/coin.dart';
 class ApiMethods {
   Future<double> getPrice(String id) async {
     try {
-      var url = Uri.parse('https://api.coingecko.com/api/v3/coins/$id');
+      var formattedId = id.replaceAll(' ', '-');
+      var url = Uri.parse('https://api.coingecko.com/api/v3/coins/$formattedId');
       var response = await http.get(url);
       var json = jsonDecode(response.body);
       var value = json['market_data']['current_price']['usd'].toString();
@@ -21,7 +22,7 @@ class ApiMethods {
   Future<List<Coin>> getCoinsList() async {
     try {
       var url = Uri.parse(
-          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1');
+          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1');
       var response = await http.get(url);
       var json = jsonDecode(response.body);
       List<Coin> coinsList = [];
