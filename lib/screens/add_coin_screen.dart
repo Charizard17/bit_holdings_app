@@ -16,6 +16,8 @@ class AddCoinScreen extends StatefulWidget {
 class _AddCoinScreenState extends State<AddCoinScreen> {
   bool _coinSelected = false;
   String _selectedCoinName = '';
+  String priceOnChanged = '';
+  String quantityOnChanged = '';
   TextEditingController _buyPrice = TextEditingController();
   TextEditingController _quantity = TextEditingController();
   DateTime _selectedDate = DateTime.now();
@@ -224,6 +226,9 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                     color: Colors.white,
                                     fontSize: 18,
                                   ),
+                                  onChanged: (newValue) {
+                                    priceOnChanged = newValue;
+                                  },
                                 ),
                               )
                             ],
@@ -253,10 +258,32 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                     color: Colors.white,
                                     fontSize: 18,
                                   ),
+                                  onChanged: (newValue) {
+                                    quantityOnChanged = newValue;
+                                  },
                                 ),
                               )
                             ],
                           ),
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Invested amount:',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              Text(
+                                '\$${double.parse(priceOnChanged)*double.parse(quantityOnChanged)}',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
