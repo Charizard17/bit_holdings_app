@@ -26,6 +26,15 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(vertical: 13),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            width: 1,
+            color: Colors.white,
+          ),
+        ),
+      ),
       child: Column(
         children: [
           Row(
@@ -47,11 +56,13 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 5),
-                    Text(
-                      '${widget.name}',
-                      style: TextStyle(
-                        fontSize: 18,
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        '${widget.name}',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ],
@@ -62,19 +73,25 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      '\$${(double.parse(widget.quantity) * double.parse(widget.coin.price)).toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: 16,
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        '\$${(double.parse(widget.quantity) * double.parse(widget.coin.price)).toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                        textAlign: TextAlign.right,
                       ),
-                      textAlign: TextAlign.right,
                     ),
-                    Text(
-                      '${widget.quantity} ${(widget.coin.symbol).toUpperCase()}',
-                      style: TextStyle(
-                        fontSize: 16,
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        '${widget.quantity} ${(widget.coin.symbol).toUpperCase()}',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                        textAlign: TextAlign.right,
                       ),
-                      textAlign: TextAlign.right,
                     ),
                   ],
                 ),
@@ -84,41 +101,43 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      '%${((double.parse(widget.coin.price) - double.parse(widget.buyPrice)) / double.parse(widget.buyPrice) * 100).toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: ((double.parse(widget.coin.price) -
-                                        double.parse(widget.buyPrice)) /
-                                    double.parse(widget.buyPrice) *
-                                    100) >
-                                0
-                            ? Colors.green
-                            : Colors.red,
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        '%${((double.parse(widget.coin.price) - double.parse(widget.buyPrice)) / double.parse(widget.buyPrice) * 100).toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: ((double.parse(widget.coin.price) -
+                                          double.parse(widget.buyPrice)) /
+                                      double.parse(widget.buyPrice) *
+                                      100) >
+                                  0
+                              ? Colors.green
+                              : Colors.red,
+                        ),
+                        textAlign: TextAlign.right,
                       ),
-                      textAlign: TextAlign.right,
                     ),
-                    Text(
-                      '\$${((double.parse(widget.coin.price) - double.parse(widget.buyPrice)) * double.parse(widget.quantity)).toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: ((double.parse(widget.coin.price) -
-                                        double.parse(widget.buyPrice)) *
-                                    double.parse(widget.quantity)) >
-                                0
-                            ? Colors.green
-                            : Colors.red,
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        '\$${((double.parse(widget.coin.price) - double.parse(widget.buyPrice)) * double.parse(widget.quantity)).toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: ((double.parse(widget.coin.price) -
+                                          double.parse(widget.buyPrice)) *
+                                      double.parse(widget.quantity)) >
+                                  0
+                              ? Colors.green
+                              : Colors.red,
+                        ),
+                        textAlign: TextAlign.right,
                       ),
-                      textAlign: TextAlign.right,
                     ),
                   ],
                 ),
               ),
             ],
-          ),
-          Divider(
-            color: Colors.white,
-            thickness: 0.5,
           ),
         ],
       ),
