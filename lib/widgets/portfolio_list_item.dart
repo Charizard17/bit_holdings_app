@@ -31,21 +31,6 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Expanded(
-              //   flex: 1,
-              //   child: CircleAvatar(
-              //     backgroundColor: Colors.black,
-              //     radius: 15,
-              //     child: ClipOval(
-              //       child: Image.network(
-              //         widget.coin.image,
-              //         fit: BoxFit.cover,
-              //         width: 30,
-              //         height: 30,
-              //       ),
-              //     ),
-              //   ),
-              // ),
               Expanded(
                 flex: 2,
                 child: Row(
