@@ -7,6 +7,8 @@ import '../services/api_methods.dart';
 import '../widgets/portfolio_list_item.dart';
 import 'add_coin_screen.dart';
 
+ApiMethods _apiMethods = ApiMethods();
+
 class PortfolioScreen extends StatelessWidget {
   const PortfolioScreen({Key? key}) : super(key: key);
 
@@ -154,40 +156,56 @@ class PortfolioScreen extends StatelessWidget {
               ),
               SizedBox(height: 5),
               Divider(color: Colors.white),
-              Container(
-                child: StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection('Users')
-                      .doc(FirebaseAuth.instance.currentUser?.uid)
-                      .collection('Coins')
-                      .snapshots(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      );
-                    }
-                    return ListView(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      children: snapshot.data!.docs.map((document) {
-                        return Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 10,
-                          ),
-                          child: PortfolioListItem(
-                            name: document.id,
-                            price: document['Price'].toString(),
-                            quantity: document['Quantity'].toString(),
-                          ),
-                        );
-                      }).toList(),
+              FutureBuilder(
+                future: _apiMethods.getCoinsList(),
+                builder: (BuildContext context, AsyncSnapshot futureSnapshot) {
+                  if (!futureSnapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: Theme.of(context).primaryColor,
+                      ),
                     );
-                  },
-                ),
+                  }
+
+                  return Container(
+                    child: StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection('Users')
+                          .doc(FirebaseAuth.instance.currentUser?.uid)
+                          .collection('Coins')
+                          .snapshots(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                        if (!streamSnapshot.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          );
+                        }
+
+                        return ListView(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          children: streamSnapshot.data!.docs.map((document) {
+                            final currentPrice = futureSnapshot.data.firstWhere((coin) => coin.name == document.id).price;
+                            return Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10,
+                              ),
+                              child: PortfolioListItem(
+                                name: document.id,
+                                price: document['Price'].toString(),
+                                quantity: document['Quantity'].toString(),
+                                currentPrice: currentPrice,
+                              ),
+                            );
+                          }).toList(),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
             ],
           ),

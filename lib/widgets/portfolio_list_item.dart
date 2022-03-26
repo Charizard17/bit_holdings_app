@@ -2,17 +2,26 @@ import 'package:flutter/material.dart';
 
 import '../services/api_methods.dart';
 
-class PortfolioListItem extends StatelessWidget {
+ApiMethods _apiMethods = ApiMethods();
+
+class PortfolioListItem extends StatefulWidget {
   final String name;
   final String price;
   final String quantity;
+  final String currentPrice;
   const PortfolioListItem({
     Key? key,
     required this.name,
     required this.price,
     required this.quantity,
+    required this.currentPrice,
   }) : super(key: key);
 
+  @override
+  State<PortfolioListItem> createState() => _PortfolioListItemState();
+}
+
+class _PortfolioListItemState extends State<PortfolioListItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +34,7 @@ class PortfolioListItem extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              '${name}',
+              '${widget.name}',
               style: TextStyle(
                 fontSize: 18,
               ),
@@ -34,7 +43,7 @@ class PortfolioListItem extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              '${quantity}',
+              '${widget.quantity}',
               style: TextStyle(
                 fontSize: 18,
               ),
@@ -44,9 +53,15 @@ class PortfolioListItem extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Text(
-              '_profit',
+              '\$${(double.parse(widget.currentPrice) - double.parse(widget.price)) * double.parse(widget.quantity)}',
               style: TextStyle(
                 fontSize: 18,
+                color: ((double.parse(widget.currentPrice) -
+                                double.parse(widget.price)) *
+                            double.parse(widget.quantity)) >
+                        0
+                    ? Colors.green
+                    : Colors.red,
               ),
               textAlign: TextAlign.right,
             ),

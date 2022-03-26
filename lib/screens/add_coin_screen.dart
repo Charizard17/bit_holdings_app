@@ -265,24 +265,24 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                               )
                             ],
                           ),
-                          SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Invested amount:',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
-                              ),
-                              Text(
-                                '\$${double.parse(priceOnChanged)*double.parse(quantityOnChanged)}',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
-                          ),
+                          // SizedBox(height: 20),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Text(
+                          //       'Invested amount:',
+                          //       style: TextStyle(
+                          //         fontSize: 18,
+                          //       ),
+                          //     ),
+                          //     Text(
+                          //       '\$${double.parse(priceOnChanged)*double.parse(quantityOnChanged)}',
+                          //       style: TextStyle(
+                          //         fontSize: 18,
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                           SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
