@@ -26,15 +26,27 @@ class TotalPortfolioInfo extends StatelessWidget {
             children: [
               Text(
                 'Portfolio',
-                style: Theme.of(context).textTheme.headline5,
+                style: TextStyle(
+                  fontSize: 25,
+                ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('Change'),
                   Text(
-                    '%${((double.parse(currentValue) - double.parse(totalInvested))/double.parse(totalInvested)*100).toStringAsFixed(2)}',
-                    style: Theme.of(context).textTheme.headline6,
+                    'Change',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      '%${((double.parse(currentValue) - double.parse(totalInvested)) / double.parse(totalInvested) * 100).toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -47,20 +59,36 @@ class TotalPortfolioInfo extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Invested Amount'),
                   Text(
-                    '\$${totalInvested}',
-                    style: Theme.of(context).textTheme.headline6,
+                    'Invested Amount',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      '\$${totalInvested}',
+                      style: TextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
                   ),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('Current Value'),
                   Text(
-                    '\$${currentValue}',
-                    style: Theme.of(context).textTheme.headline6,
+                    'Current Value',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      '\$${currentValue}',
+                      style: TextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
                   ),
                 ],
               ),
