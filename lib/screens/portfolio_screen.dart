@@ -58,14 +58,14 @@ class PortfolioScreen extends StatelessWidget {
                         double totalInvested = 0.0;
                         double currentValue = 0.0;
 
-                        streamSnapshot.data!.docs.forEach((element) {
+                        streamSnapshot.data!.docs.forEach((document) {
                           final Coin tempCoin = futureSnapshot.data
-                              .firstWhere((coin) => coin.name == element.id);
+                              .firstWhere((coin) => coin.name == document.id.replaceAll('-', ' '));
                           totalInvested +=
-                              double.parse(element.get('Quantity').toString()) *
-                                  double.parse(element.get('Price').toString());
+                              double.parse(document.get('Quantity').toString()) *
+                                  double.parse(document.get('Price').toString());
                           currentValue +=
-                              double.parse(element.get('Quantity').toString()) *
+                              double.parse(document.get('Quantity').toString()) *
                                   double.parse(tempCoin.price.toString());
                         });
 
@@ -159,7 +159,7 @@ class PortfolioScreen extends StatelessWidget {
                                   streamSnapshot.data!.docs.map((document) {
                                 final Coin coin = futureSnapshot.data
                                     .firstWhere(
-                                        (coin) => coin.name == document.id);
+                                        (coin) => coin.name == document.id.replaceAll('-', ' '));
                                 return Container(
                                   child: PortfolioListItem(
                                     name: document.id,
