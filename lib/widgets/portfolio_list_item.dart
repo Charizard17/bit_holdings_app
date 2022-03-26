@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 
+import '../models/coin.dart';
 import '../services/api_methods.dart';
 
 ApiMethods _apiMethods = ApiMethods();
 
 class PortfolioListItem extends StatefulWidget {
   final String name;
-  final String price;
+  final String buyPrice;
   final String quantity;
-  final String currentPrice;
+  final Coin coin;
   const PortfolioListItem({
     Key? key,
     required this.name,
-    required this.price,
+    required this.buyPrice,
     required this.quantity,
-    required this.currentPrice,
+    required this.coin,
   }) : super(key: key);
 
   @override
@@ -25,46 +26,114 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
-        bottom: 10,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          Expanded(
-            flex: 2,
-            child: Text(
-              '${widget.name}',
-              style: TextStyle(
-                fontSize: 18,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Expanded(
+              //   flex: 1,
+              //   child: CircleAvatar(
+              //     backgroundColor: Colors.black,
+              //     radius: 15,
+              //     child: ClipOval(
+              //       child: Image.network(
+              //         widget.coin.image,
+              //         fit: BoxFit.cover,
+              //         width: 30,
+              //         height: 30,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              Expanded(
+                flex: 2,
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.black,
+                      radius: 15,
+                      child: ClipOval(
+                        child: Image.network(
+                          widget.coin.image,
+                          fit: BoxFit.cover,
+                          width: 30,
+                          height: 30,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                      '${widget.name}',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '\$${(double.parse(widget.quantity) * double.parse(widget.coin.price)).toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                      textAlign: TextAlign.right,
+                    ),
+                    Text(
+                      '${widget.quantity} ${(widget.coin.symbol).toUpperCase()}',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                      textAlign: TextAlign.right,
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '%${((double.parse(widget.coin.price) - double.parse(widget.buyPrice)) / double.parse(widget.buyPrice) * 100).toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: ((double.parse(widget.coin.price) -
+                                        double.parse(widget.buyPrice)) /
+                                    double.parse(widget.buyPrice) *
+                                    100) >
+                                0
+                            ? Colors.green
+                            : Colors.red,
+                      ),
+                      textAlign: TextAlign.right,
+                    ),
+                    Text(
+                      '\$${((double.parse(widget.coin.price) - double.parse(widget.buyPrice)) * double.parse(widget.quantity)).toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: ((double.parse(widget.coin.price) -
+                                        double.parse(widget.buyPrice)) *
+                                    double.parse(widget.quantity)) >
+                                0
+                            ? Colors.green
+                            : Colors.red,
+                      ),
+                      textAlign: TextAlign.right,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              '${widget.quantity}',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-              textAlign: TextAlign.right,
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Text(
-              '\$${(double.parse(widget.currentPrice) - double.parse(widget.price)) * double.parse(widget.quantity)}',
-              style: TextStyle(
-                fontSize: 18,
-                color: ((double.parse(widget.currentPrice) -
-                                double.parse(widget.price)) *
-                            double.parse(widget.quantity)) >
-                        0
-                    ? Colors.green
-                    : Colors.red,
-              ),
-              textAlign: TextAlign.right,
-            ),
+          Divider(
+            color: Colors.white,
+            thickness: 0.5,
           ),
         ],
       ),

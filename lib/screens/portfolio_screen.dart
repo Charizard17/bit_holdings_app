@@ -6,6 +6,7 @@ import 'package:animations/animations.dart';
 import '../services/api_methods.dart';
 import '../widgets/portfolio_list_item.dart';
 import 'add_coin_screen.dart';
+import '../models/coin.dart';
 
 ApiMethods _apiMethods = ApiMethods();
 
@@ -89,7 +90,7 @@ class PortfolioScreen extends StatelessWidget {
                   Text(
                     'Your Assets',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 22,
                     ),
                   ),
                   SizedBox(
@@ -123,7 +124,7 @@ class PortfolioScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    flex: 3,
+                    flex: 2,
                     child: Text(
                       'Coin',
                       style: TextStyle(
@@ -139,11 +140,11 @@ class PortfolioScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18,
                       ),
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.right,
                     ),
                   ),
                   Expanded(
-                    flex: 3,
+                    flex: 2,
                     child: Text(
                       'Profit/Loss',
                       style: TextStyle(
@@ -188,16 +189,15 @@ class PortfolioScreen extends StatelessWidget {
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           children: streamSnapshot.data!.docs.map((document) {
-                            final currentPrice = futureSnapshot.data.firstWhere((coin) => coin.name == document.id).price;
+                            final Coin coin = futureSnapshot.data
+                                .firstWhere((coin) => coin.name == document.id);
                             return Container(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 10,
-                              ),
+                              // padding: EdgeInsets.symmetric(vertical: 10),
                               child: PortfolioListItem(
                                 name: document.id,
-                                price: document['Price'].toString(),
+                                buyPrice: document['Price'].toString(),
                                 quantity: document['Quantity'].toString(),
-                                currentPrice: currentPrice,
+                                coin: coin,
                               ),
                             );
                           }).toList(),
