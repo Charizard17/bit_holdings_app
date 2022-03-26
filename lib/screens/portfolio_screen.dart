@@ -18,9 +18,6 @@ class PortfolioScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double totalInvested = 0.0;
-    double currentValue = 0.0;
-
     return SafeArea(
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -57,6 +54,9 @@ class PortfolioScreen extends StatelessWidget {
                             ),
                           );
                         }
+
+                        double totalInvested = 0.0;
+                        double currentValue = 0.0;
 
                         streamSnapshot.data!.docs.forEach((element) {
                           final Coin tempCoin = futureSnapshot.data
