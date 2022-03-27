@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'home_screen.dart';
 import 'portfolio_screen.dart';
 import 'settings_screen.dart';
 import 'coins_list_screen.dart';
@@ -15,7 +14,6 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   int _selectedIndex = 0;
   static List<Widget> _screenList = [
-    // HomeScreen(),
     CoinsListScreen(),
     PortfolioScreen(),
     SettingsScreen(),
@@ -37,10 +35,6 @@ class _MainViewState extends State<MainView> {
         selectedItemColor: Theme.of(context).focusColor,
         unselectedItemColor: Theme.of(context).hintColor,
         items: <BottomNavigationBarItem>[
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.home_outlined),
-          //   label: 'Home',
-          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.list_rounded),
             label: 'Coins',
