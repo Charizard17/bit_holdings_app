@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../services/flutterfire.dart';
+
+FlutterFire _flutterFire = FlutterFire();
 
 class ThemeProvider extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.dark;
@@ -7,6 +10,7 @@ class ThemeProvider extends ChangeNotifier {
 
   void toggleTheme(bool isOn) {
     themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
+    _flutterFire.addSettings(isOn.toString());
     notifyListeners();
   }
 }

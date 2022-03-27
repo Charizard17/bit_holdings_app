@@ -89,4 +89,27 @@ class FlutterFire {
         .whenComplete(() => print('Coin deleted from the database'))
         .catchError((e) => print(e));
   }
+
+  Future<bool> addSettings(String isDarkMode) async {
+    try {
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+      DocumentReference documentReference = FirebaseFirestore.instance
+          .collection('Users')
+          .doc(uid)
+          .collection('Settings')
+          .doc('ThemeMode');
+      FirebaseFirestore.instance.runTransaction((transaction) async {
+        DocumentSnapshot snapshot = await transaction.get(documentReference);
+        if (!snapshot.exists) {
+          documentReference.set({'isDarkMode': isDarkMode});
+          return true;
+        }
+        transaction.update(documentReference, {'isDarkMode': isDarkMode});
+        return true;
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

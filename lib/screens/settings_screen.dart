@@ -27,153 +27,162 @@ class _SettingsScreenState extends State<SettingsScreen> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.only(top: 20),
-        child: Column(
-          children: [
-            Text(
-              'Settings',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            SizedBox(height: 20),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  Divider(
-                    color: Theme.of(context).textTheme.bodyMedium!.color,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Language',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      DropdownButton<String>(
-                        value: languageDropdownValue,
-                        icon: Icon(Icons.arrow_downward),
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize:
-                              Theme.of(context).textTheme.bodyMedium!.fontSize,
-                        ),
-                        dropdownColor: Theme.of(context).primaryColorLight,
-                        underline: Container(
-                          height: 1,
-                        ),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            languageDropdownValue = newValue!;
-                          });
-                        },
-                        items: <String>['English', 'German', 'Turkish']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: Theme.of(context).textTheme.bodyMedium!.color,
-                    thickness: 1,
-                  ),
-                  SwitchListTile(
-                    title: Text(
-                      themeProvider.isDarkMode == true
-                          ? 'Dark Mode'
-                          : 'Light Mode',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color:
-                                Theme.of(context).textTheme.bodyMedium!.color,
-                          ),
-                    ),
-                    secondary: themeProvider.isDarkMode == true
-                        ? Icon(
-                            Icons.dark_mode_rounded,
-                            color: Theme.of(context).focusColor,
-                          )
-                        : Icon(
-                            Icons.light_mode,
-                            color: Colors.amber,
-                          ),
-                    activeColor: Theme.of(context).focusColor,
-                    inactiveThumbColor: Colors.amber,
-                    inactiveTrackColor: Colors.amber.withOpacity(0.7),
-                    value: themeProvider.isDarkMode,
-                    onChanged: (value) {
-                      final provider =
-                          Provider.of<ThemeProvider>(context, listen: false);
-                      provider.toggleTheme(value);
-                    },
-                  ),
-                  Divider(
-                    color: Theme.of(context).textTheme.bodyMedium!.color,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Currency',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      DropdownButton<String>(
-                        value: currencyDropdownValue,
-                        icon: const Icon(Icons.arrow_downward),
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        dropdownColor: Theme.of(context).primaryColorLight,
-                        underline: Container(
-                          height: 1,
-                        ),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            currencyDropdownValue = newValue!;
-                          });
-                        },
-                        items: <String>['USD', 'EUR', 'GBP']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 100),
-                  MaterialButton(
-                    color: Theme.of(context).focusColor,
-                    child: Text(
-                      'Sign Out',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                    onPressed: () async {
-                      bool shouldNavigate = await _flutterFire.signOut();
-                      if (shouldNavigate) {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const SignInScreen(),
-                          ),
-                        );
-                      }
-                    },
-                  ),
-                ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              Text(
+                'Settings',
+                style: Theme.of(context).textTheme.titleMedium,
               ),
-            ),
-          ],
+              SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    Divider(
+                      color: Theme.of(context).textTheme.bodyMedium!.color,
+                      thickness: 1,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Language',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        DropdownButton<String>(
+                          value: languageDropdownValue,
+                          icon: Icon(Icons.arrow_downward),
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .fontSize,
+                          ),
+                          dropdownColor: Theme.of(context).primaryColorLight,
+                          underline: Container(
+                            height: 1,
+                          ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              languageDropdownValue = newValue!;
+                            });
+                          },
+                          items: <String>['English', 'German', 'Turkish']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      color: Theme.of(context).textTheme.bodyMedium!.color,
+                      thickness: 1,
+                    ),
+                    SwitchListTile(
+                      title: Text(
+                        themeProvider.isDarkMode == true
+                            ? 'Dark Mode'
+                            : 'Light Mode',
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color:
+                                  Theme.of(context).textTheme.bodyMedium!.color,
+                            ),
+                      ),
+                      secondary: themeProvider.isDarkMode == true
+                          ? Icon(
+                              Icons.dark_mode_rounded,
+                              color: Theme.of(context).focusColor,
+                            )
+                          : Icon(
+                              Icons.light_mode,
+                              color: Colors.amber,
+                            ),
+                      activeColor: Theme.of(context).focusColor,
+                      inactiveThumbColor: Colors.amber,
+                      inactiveTrackColor: Colors.amber.withOpacity(0.7),
+                      value: themeProvider.isDarkMode,
+                      onChanged: (value) {
+                        final provider =
+                            Provider.of<ThemeProvider>(context, listen: false);
+                        provider.toggleTheme(value);
+                      },
+                    ),
+                    Divider(
+                      color: Theme.of(context).textTheme.bodyMedium!.color,
+                      thickness: 1,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Currency',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        DropdownButton<String>(
+                          value: currencyDropdownValue,
+                          icon: const Icon(Icons.arrow_downward),
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          dropdownColor: Theme.of(context).primaryColorLight,
+                          underline: Container(
+                            height: 1,
+                          ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              currencyDropdownValue = newValue!;
+                            });
+                          },
+                          items: <String>['USD', 'EUR', 'GBP']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(child: Container()),
+              Container(
+                margin: EdgeInsets.only(bottom: 50),
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: MaterialButton(
+                  color: Theme.of(context).focusColor,
+                  child: Text(
+                    'Sign Out',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  onPressed: () async {
+                    bool shouldNavigate = await _flutterFire.signOut();
+                    if (shouldNavigate) {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const SignInScreen(),
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

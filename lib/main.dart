@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,21 +35,59 @@ class MyApp extends StatelessWidget {
       builder: (context, _) {
         final themeProvider = Provider.of<ThemeProvider>(context);
 
-        return MaterialApp(
-          title: 'BitHoldings App',
-          themeMode: themeProvider.themeMode,
-          theme: CustomThemeData.lightThemeData,
-          darkTheme: CustomThemeData.darkThemeData,
-          home: StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return MainView();
-              } else {
-                return SignInScreen();
-              }
-            },
-          ),
+        return StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('Users')
+              .doc(FirebaseAuth.instance.currentUser?.uid)
+              .collection('Settings')
+              .snapshots(),
+          builder: (BuildContext context,
+              AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+            if (!streamSnapshot.hasData) {
+              return MaterialApp(
+                title: 'BitHoldings App',
+                themeMode: themeProvider.themeMode,
+                theme: CustomThemeData.lightThemeData,
+                darkTheme: CustomThemeData.darkThemeData,
+                home: StreamBuilder(
+                  stream: FirebaseAuth.instance.authStateChanges(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return MainView();
+                    } else {
+                      return SignInScreen();
+                    }
+                  },
+                ),
+              );
+            }
+
+            final isDarkMode = streamSnapshot.data!.docs
+                .firstWhere((document) => document.id == 'ThemeMode');
+
+            if (isDarkMode.get('isDarkMode') == 'true') {
+              themeProvider.themeMode = ThemeMode.dark;
+            } else if (isDarkMode.get('isDarkMode') == 'false') {
+              themeProvider.themeMode = ThemeMode.light;
+            }
+
+            return MaterialApp(
+              title: 'BitHoldings App',
+              themeMode: themeProvider.themeMode,
+              theme: CustomThemeData.lightThemeData,
+              darkTheme: CustomThemeData.darkThemeData,
+              home: StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return MainView();
+                  } else {
+                    return SignInScreen();
+                  }
+                },
+              ),
+            );
+          },
         );
       },
     );
