@@ -28,8 +28,8 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
       DateTime? selectedDate = await showDatePicker(
         context: context,
         initialDate: _selectedDate,
-        firstDate: DateTime(2009),
-        lastDate: DateTime(DateTime.now().year + 1),
+        firstDate: DateTime(2010),
+        lastDate: DateTime.now(),
       );
       if (selectedDate != null && selectedDate != _selectedDate) {
         setState(() {
