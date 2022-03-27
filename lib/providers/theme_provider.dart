@@ -24,6 +24,7 @@ class CustomThemeData {
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Color.fromARGB(179, 203, 203, 203),
     ),
+    fontFamily: 'Texturina',
     textTheme: TextTheme(
       titleLarge: TextStyle(
         fontSize: 28,
@@ -69,6 +70,7 @@ class CustomThemeData {
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Color.fromARGB(255, 65, 65, 65),
     ),
+    fontFamily: 'Oxygen',
     textTheme: TextTheme(
       titleLarge: TextStyle(
         fontSize: 30,
