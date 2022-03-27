@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'providers/theme_provider.dart';
 import 'screens/main_view.dart';
@@ -44,31 +45,43 @@ class MyApp extends StatelessWidget {
           builder: (BuildContext context,
               AsyncSnapshot<QuerySnapshot> streamSnapshot) {
             if (!streamSnapshot.hasData) {
-              return MaterialApp(
-                title: 'BitHoldings App',
-                themeMode: themeProvider.themeMode,
-                theme: CustomThemeData.lightThemeData,
-                darkTheme: CustomThemeData.darkThemeData,
-                home: StreamBuilder(
-                  stream: FirebaseAuth.instance.authStateChanges(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return MainView();
-                    } else {
-                      return SignInScreen();
-                    }
-                  },
+              // return MaterialApp(
+              //   title: 'BitHoldings App',
+              //   themeMode: themeProvider.themeMode,
+              //   theme: CustomThemeData.lightThemeData,
+              //   darkTheme: CustomThemeData.darkThemeData,
+              //   home: StreamBuilder(
+              //     stream: FirebaseAuth.instance.authStateChanges(),
+              //     builder: (context, snapshot) {
+              //       if (snapshot.hasData) {
+              //         return MainView();
+              //       } else {
+              //         return SignInScreen();
+              //       }
+              //     },
+              //   ),
+              // );
+              return Container(
+                color: CustomThemeData.darkThemeData.focusColor,
+                child: Center(
+                  child: Image.asset(
+                    'assets/images/bitholdings_256.png',
+                    width: 150,
+                    height: 150,
+                  ),
                 ),
               );
             }
 
-            final isDarkMode = streamSnapshot.data!.docs
-                .firstWhere((document) => document.id == 'ThemeMode');
+            if (streamSnapshot.data!.docs.length != 0) {
+              final isDarkMode = streamSnapshot.data!.docs
+                  .firstWhere((document) => document.id == 'ThemeMode');
 
-            if (isDarkMode.get('isDarkMode') == 'true') {
-              themeProvider.themeMode = ThemeMode.dark;
-            } else if (isDarkMode.get('isDarkMode') == 'false') {
-              themeProvider.themeMode = ThemeMode.light;
+              if (isDarkMode.get('isDarkMode') == 'true') {
+                themeProvider.themeMode = ThemeMode.dark;
+              } else if (isDarkMode.get('isDarkMode') == 'false') {
+                themeProvider.themeMode = ThemeMode.light;
+              }
             }
 
             return MaterialApp(
