@@ -65,4 +65,18 @@ class FlutterFire {
       return false;
     }
   }
+
+  Future<void> deleteCoin(String coin) async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+    DocumentReference documentReference = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(uid)
+        .collection('Coins')
+        .doc(coin);
+
+    await documentReference
+        .delete()
+        .whenComplete(() => print('Coin deleted from the database'))
+        .catchError((e) => print(e));
+  }
 }

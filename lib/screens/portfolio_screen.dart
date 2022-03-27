@@ -7,12 +7,14 @@ import 'package:animations/animations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../services/api_methods.dart';
+import '../services/flutterfire.dart';
 import '../widgets/portfolio_list_item.dart';
 import 'add_coin_screen.dart';
 import '../models/coin.dart';
 import '../widgets/total_portfolio_info.dart';
 
 ApiMethods _apiMethods = ApiMethods();
+FlutterFire _flutterFire = FlutterFire();
 
 class PortfolioScreen extends StatelessWidget {
   const PortfolioScreen({Key? key}) : super(key: key);
@@ -225,8 +227,9 @@ class PortfolioScreen extends StatelessWidget {
                                           Icons.delete_outline_rounded,
                                           color: Colors.red,
                                         ),
-                                        onPressed: () {
-                                          // TODO
+                                        onPressed: () async {
+                                          await _flutterFire
+                                              .deleteCoin(document.id);
                                         },
                                       ),
                                     ],
