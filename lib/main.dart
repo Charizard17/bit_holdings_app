@@ -1,20 +1,24 @@
-import 'package:bit_holdings_app/screens/landing_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
+import 'package:flutter/services.dart';
 
+import 'screens/landing_screen.dart';
 import 'providers/theme_provider.dart';
 import 'screens/main_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(
-    EasyDynamicThemeWidget(
-      child: const MyApp(),
-    ),
-  );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(
+      EasyDynamicThemeWidget(
+        child: const MyApp(),
+      ),
+    );
+  });
 }
 
 class MyApp extends StatelessWidget {
