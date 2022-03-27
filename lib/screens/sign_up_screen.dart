@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'sign_in_screen.dart';
@@ -34,11 +35,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Container(
               color: Theme.of(context).primaryColorLight,
               padding: EdgeInsets.only(left: 15),
-              child: TextFormField(
+              child: TextField(
                 controller: _email,
                 decoration: InputDecoration(
                   hintText: 'example@email.com',
                   hintStyle: Theme.of(context).textTheme.bodyLarge,
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).focusColor,
+                    ),
+                  ),
                 ),
                 style: TextStyle(
                   fontSize: 20,
@@ -49,12 +55,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Container(
               color: Theme.of(context).primaryColorLight,
               padding: EdgeInsets.only(left: 15),
-              child: TextFormField(
+              child: TextField(
                 controller: _password,
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'password',
                   hintStyle: Theme.of(context).textTheme.bodyLarge,
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).focusColor,
+                    ),
+                  ),
                 ),
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
@@ -81,30 +92,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 }
               },
             ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Already have an account?",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                TextButton(
-                  child: Text(
-                    'Sign In',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            SizedBox(height: 30),
+            RichText(
+              text: TextSpan(
+                style: Theme.of(context).textTheme.bodySmall,
+                children: [
+                  TextSpan(text: 'Already have an account? '),
+                  TextSpan(
+                    text: 'Sign In',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context).focusColor,
                         ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const SignInScreen(),
+                          ),
+                        );
+                      },
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => const SignInScreen(),
-                      ),
-                    );
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
