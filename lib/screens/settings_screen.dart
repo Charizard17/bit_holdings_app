@@ -1,7 +1,11 @@
+import 'package:bit_holdings_app/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/theme_provider.dart';
+import '../services/flutterfire.dart';
+
+FlutterFire _flutterFire = FlutterFire();
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -144,6 +148,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         }).toList(),
                       ),
                     ],
+                  ),
+                  SizedBox(height: 100),
+                  MaterialButton(
+                    color: Theme.of(context).focusColor,
+                    child: Text(
+                      'Sign Out',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    onPressed: () async {
+                      bool shouldNavigate = await _flutterFire.signOut();
+                      if (shouldNavigate) {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const SignInScreen(),
+                          ),
+                        );
+                      }
+                    },
                   ),
                 ],
               ),

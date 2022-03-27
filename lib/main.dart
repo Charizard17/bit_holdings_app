@@ -1,12 +1,13 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
-import 'package:flutter/services.dart';
 
-import 'screens/landing_screen.dart';
 import 'providers/theme_provider.dart';
 import 'screens/main_view.dart';
+import 'screens/sign_in_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +37,16 @@ class MyApp extends StatelessWidget {
           themeMode: themeProvider.themeMode,
           theme: CustomThemeData.lightThemeData,
           darkTheme: CustomThemeData.darkThemeData,
-          home: MainView(),
+          home: StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return MainView();
+              } else {
+                return SignInScreen();
+              }
+            },
+          ),
         );
       },
     );

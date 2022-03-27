@@ -52,8 +52,8 @@ class CustomThemeData {
       ),
     ),
     buttonTheme: ButtonThemeData(
-      minWidth: 300,
-      height: 70,
+      minWidth: double.infinity,
+      height: 50,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
@@ -98,8 +98,8 @@ class CustomThemeData {
       ),
     ),
     buttonTheme: ButtonThemeData(
-      minWidth: double.infinity - 150,
-      height: 70,
+      minWidth: double.infinity,
+      height: 50,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),

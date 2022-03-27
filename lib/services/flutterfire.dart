@@ -13,6 +13,16 @@ class FlutterFire {
     }
   }
 
+  Future<bool> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
   Future<bool> signUp(String email, String password) async {
     try {
       await FirebaseAuth.instance
