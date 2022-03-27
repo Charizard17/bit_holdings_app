@@ -32,6 +32,7 @@ dependencies:
   animations: ^2.0.2
   intl: ^0.17.0
   http: ^0.13.4
+  flutter_slidable: ^1.2.0
 
   # FlutterFire
   firebase_core: ^1.12.0

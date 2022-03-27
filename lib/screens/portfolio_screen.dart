@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../services/api_methods.dart';
 import '../widgets/portfolio_list_item.dart';
@@ -157,7 +158,8 @@ class PortfolioScreen extends StatelessWidget {
               Expanded(
                 child: FutureBuilder(
                   future: _apiMethods.getCoinsList(),
-                  builder: (BuildContext context, AsyncSnapshot futureSnapshot) {
+                  builder:
+                      (BuildContext context, AsyncSnapshot futureSnapshot) {
                     if (!futureSnapshot.hasData) {
                       return Center(
                         child: CircularProgressIndicator(
@@ -165,7 +167,7 @@ class PortfolioScreen extends StatelessWidget {
                         ),
                       );
                     }
-              
+
                     return Container(
                       child: StreamBuilder(
                         stream: FirebaseFirestore.instance
@@ -182,7 +184,7 @@ class PortfolioScreen extends StatelessWidget {
                               ),
                             );
                           }
-              
+
                           return ListView(
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
@@ -192,11 +194,49 @@ class PortfolioScreen extends StatelessWidget {
                                       coin.name ==
                                       document.id.replaceAll('-', ' '));
                               return Container(
-                                child: PortfolioListItem(
-                                  name: document.id,
-                                  buyPrice: document['Price'].toString(),
-                                  quantity: document['Quantity'].toString(),
-                                  coin: coin,
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 13),
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      width: 1,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                child: Slidable(
+                                  endActionPane: ActionPane(
+                                    motion: ScrollMotion(),
+                                    children: [
+                                      Expanded(child: Container()),
+                                      OutlinedButton.icon(
+                                        style: OutlinedButton.styleFrom(
+                                          side: BorderSide(
+                                            width: 2.0,
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                        label: Text(
+                                          'Delete Tx',
+                                          style: TextStyle(
+                                              fontSize: 16, color: Colors.red),
+                                        ),
+                                        icon: Icon(
+                                          Icons.delete_outline_rounded,
+                                          color: Colors.red,
+                                        ),
+                                        onPressed: () {
+                                          // TODO
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  child: PortfolioListItem(
+                                    name: document.id,
+                                    buyPrice: document['Price'].toString(),
+                                    quantity: document['Quantity'].toString(),
+                                    coin: coin,
+                                  ),
                                 ),
                               );
                             }).toList(),

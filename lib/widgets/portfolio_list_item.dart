@@ -26,15 +26,6 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 13),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            width: 1,
-            color: Colors.white,
-          ),
-        ),
-      ),
       child: Column(
         children: [
           Row(
