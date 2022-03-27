@@ -89,9 +89,7 @@ class PortfolioScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Your Assets',
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                   SizedBox(
                     width: 35,
@@ -112,7 +110,11 @@ class PortfolioScreen extends StatelessWidget {
                             color: Color(0XFF59B5B2),
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          child: Icon(Icons.add),
+                          child: Icon(
+                            Icons.add,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium!.color,
+                          ),
                         );
                       },
                     ),
@@ -127,9 +129,7 @@ class PortfolioScreen extends StatelessWidget {
                     flex: 2,
                     child: Text(
                       'Coin',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.left,
                     ),
                   ),
@@ -137,9 +137,7 @@ class PortfolioScreen extends StatelessWidget {
                     flex: 2,
                     child: Text(
                       'Holdings',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.right,
                     ),
                   ),
@@ -147,16 +145,17 @@ class PortfolioScreen extends StatelessWidget {
                     flex: 2,
                     child: Text(
                       'Profit/Loss',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.right,
                     ),
                   ),
                 ],
               ),
               SizedBox(height: 5),
-              Divider(color: Colors.white),
+              Divider(
+                color: Theme.of(context).textTheme.bodyMedium!.color,
+                thickness: 1,
+              ),
               Expanded(
                 child: FutureBuilder(
                   future: _apiMethods.getCoinsList(),
@@ -202,7 +201,7 @@ class PortfolioScreen extends StatelessWidget {
                                   border: Border(
                                     bottom: BorderSide(
                                       width: 1,
-                                      color: Colors.white,
+                                      color: Theme.of(context).primaryColorLight
                                     ),
                                   ),
                                 ),

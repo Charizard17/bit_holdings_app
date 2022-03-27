@@ -28,54 +28,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
           children: [
             Text(
               'Sign Up',
-              style: TextStyle(
-                fontSize: 30,
-              ),
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             SizedBox(height: 20),
-            TextFormField(
-              controller: _email,
-              decoration: InputDecoration(
-                hintText: 'example@email.com',
-                hintStyle: TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey,
+            Container(
+              color: Theme.of(context).primaryColorLight,
+              padding: EdgeInsets.only(left: 15),
+              child: TextFormField(
+                controller: _email,
+                decoration: InputDecoration(
+                  hintText: 'example@email.com',
+                  hintStyle: Theme.of(context).textTheme.bodyLarge,
                 ),
-              ),
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
+                style: TextStyle(
+                  fontSize: 20,
+                ),
               ),
             ),
             SizedBox(height: 10),
-            TextFormField(
-              controller: _password,
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: 'password',
-                hintStyle: TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey,
+            Container(
+              color: Theme.of(context).primaryColorLight,
+              padding: EdgeInsets.only(left: 15),
+              child: TextFormField(
+                controller: _password,
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: 'password',
+                  hintStyle: Theme.of(context).textTheme.bodyLarge,
                 ),
-              ),
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
             SizedBox(height: 20),
             MaterialButton(
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).focusColor,
               child: Text(
                 'Sign Up',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .copyWith(fontWeight: FontWeight.bold),
               ),
               onPressed: () async {
-                bool shouldNavigate = await _flutterFire.signUp(_email.text, _password.text);
+                bool shouldNavigate =
+                    await _flutterFire.signUp(_email.text, _password.text);
                 if (shouldNavigate) {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
@@ -91,17 +87,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: [
                 Text(
                   "Already have an account?",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 TextButton(
                   child: Text(
                     'Sign In',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Theme.of(context).primaryColor,
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Theme.of(context).focusColor,
+                        ),
                   ),
                   onPressed: () {
                     Navigator.of(context).pushReplacement(

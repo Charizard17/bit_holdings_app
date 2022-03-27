@@ -36,7 +36,7 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundColor: Colors.black,
+                      backgroundColor: Theme.of(context).primaryColorLight,
                       radius: 15,
                       child: ClipOval(
                         child: Image.network(
@@ -51,9 +51,7 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                     Expanded(
                       child: Text(
                         '${widget.name}',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ],
@@ -68,9 +66,7 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                       fit: BoxFit.scaleDown,
                       child: Text(
                         '\$${(double.parse(widget.quantity) * double.parse(widget.coin.price)).toStringAsFixed(2)}',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
+                        style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.right,
                       ),
                     ),
@@ -78,9 +74,7 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                       fit: BoxFit.scaleDown,
                       child: Text(
                         '${widget.quantity} ${(widget.coin.symbol).toUpperCase()}',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
+                        style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.right,
                       ),
                     ),
@@ -97,7 +91,7 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                       child: Text(
                         '%${((double.parse(widget.coin.price) - double.parse(widget.buyPrice)) / double.parse(widget.buyPrice) * 100).toStringAsFixed(2)}',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: Theme.of(context).textTheme.bodySmall!.fontSize,
                           color: ((double.parse(widget.coin.price) -
                                           double.parse(widget.buyPrice)) /
                                       double.parse(widget.buyPrice) *
@@ -114,7 +108,7 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                       child: Text(
                         '\$${((double.parse(widget.coin.price) - double.parse(widget.buyPrice)) * double.parse(widget.quantity)).toStringAsFixed(2)}',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: Theme.of(context).textTheme.bodySmall!.fontSize,
                           color: ((double.parse(widget.coin.price) -
                                           double.parse(widget.buyPrice)) *
                                       double.parse(widget.quantity)) >

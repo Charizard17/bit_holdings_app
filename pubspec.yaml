@@ -33,6 +33,8 @@ dependencies:
   intl: ^0.17.0
   http: ^0.13.4
   flutter_slidable: ^1.2.0
+  easy_dynamic_theme: ^2.2.0
+  provider: ^6.0.2
 
   # FlutterFire
   firebase_core: ^1.12.0

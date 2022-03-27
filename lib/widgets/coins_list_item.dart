@@ -25,8 +25,8 @@ class CoinsListItem extends StatelessWidget {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.grey[700],
         borderRadius: BorderRadius.circular(5),
+        color: Theme.of(context).primaryColorLight,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,14 +35,13 @@ class CoinsListItem extends StatelessWidget {
             flex: 1,
             child: Text(
               rank,
-              style: TextStyle(
-                fontSize: 16,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
           Expanded(
             flex: 2,
             child: CircleAvatar(
+              backgroundColor: Theme.of(context).primaryColor,
               backgroundImage: NetworkImage(image),
               radius: 25,
             ),
@@ -54,17 +53,11 @@ class CoinsListItem extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Text(
                   symbol.toUpperCase(),
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white60,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
             ),
@@ -74,10 +67,10 @@ class CoinsListItem extends StatelessWidget {
             child: Text(
               '$priceChange24h%',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
                 color: double.parse(priceChange24h) >= 0
-                    ? Colors.greenAccent
-                    : Colors.redAccent,
+                    ? Colors.green
+                    : Colors.red,
               ),
             ),
           ),
@@ -87,9 +80,7 @@ class CoinsListItem extends StatelessWidget {
               fit: BoxFit.scaleDown,
               child: Text(
                 '\$ $price',
-                style: TextStyle(
-                  fontSize: 18,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.right,
               ),
             ),

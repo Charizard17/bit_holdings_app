@@ -18,7 +18,6 @@ class NewsCardWidget extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 5,
       margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
-        color: Colors.grey,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(

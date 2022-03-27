@@ -26,9 +26,7 @@ class CoinsListScreen extends StatelessWidget {
                     flex: 1,
                     child: Text(
                       '#',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -36,9 +34,7 @@ class CoinsListScreen extends StatelessWidget {
                     flex: 5,
                     child: Text(
                       'Coin',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -46,9 +42,7 @@ class CoinsListScreen extends StatelessWidget {
                     flex: 2,
                     child: Text(
                       '24h %',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -56,9 +50,7 @@ class CoinsListScreen extends StatelessWidget {
                     flex: 3,
                     child: Text(
                       'Price',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.center,
                     ),
                   ),

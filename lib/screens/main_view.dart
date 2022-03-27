@@ -14,7 +14,7 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   int _selectedIndex = 0;
-  static const List<Widget> _screenList = [
+  static List<Widget> _screenList = [
     // HomeScreen(),
     CoinsListScreen(),
     PortfolioScreen(),
@@ -31,12 +31,12 @@ class _MainViewState extends State<MainView> {
     return Scaffold(
       body: _screenList[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        fixedColor: Theme.of(context).primaryColor,
-        backgroundColor: Colors.black,
-        selectedFontSize: 16,
-        unselectedFontSize: 14,
+        selectedFontSize: 18,
+        unselectedFontSize: 16,
         showUnselectedLabels: true,
-        items: const <BottomNavigationBarItem>[
+        selectedItemColor: Theme.of(context).focusColor,
+        unselectedItemColor: Theme.of(context).hintColor,
+        items: <BottomNavigationBarItem>[
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.home_outlined),
           //   label: 'Home',

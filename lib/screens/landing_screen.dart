@@ -25,49 +25,44 @@ class LandingScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Create your portfolio',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Text(
                       'Explore new market pairs',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Text(
                       'Follow latest news',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ],
                 ),
               ),
             ),
-            MaterialButton(
-              color: Theme.of(context).primaryColor,
-              child: Text(
-                'Get Started',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              child: MaterialButton(
+                color: Theme.of(context).focusColor,
+                child: Text(
+                  'Get Started',
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const SignInScreen(),
+                    ),
+                  );
+                },
               ),
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => const SignInScreen(),
-                  ),
-                );
-              },
             ),
           ],
         ),

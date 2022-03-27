@@ -26,26 +26,20 @@ class TotalPortfolioInfo extends StatelessWidget {
             children: [
               Text(
                 'Portfolio',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
                     'Change',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
                       '%${((double.parse(currentValue) - double.parse(totalInvested)) / double.parse(totalInvested) * 100).toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: 22,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                 ],
@@ -61,15 +55,13 @@ class TotalPortfolioInfo extends StatelessWidget {
                 children: [
                   Text(
                     'Invested Amount',
-                    style: TextStyle(fontSize: 16),
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
                       '\$${totalInvested}',
-                      style: TextStyle(
-                        fontSize: 22,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                 ],
@@ -79,15 +71,13 @@ class TotalPortfolioInfo extends StatelessWidget {
                 children: [
                   Text(
                     'Current Value',
-                    style: TextStyle(fontSize: 16),
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
                       '\$${currentValue}',
-                      style: TextStyle(
-                        fontSize: 22,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                 ],

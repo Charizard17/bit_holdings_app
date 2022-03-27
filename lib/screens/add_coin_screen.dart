@@ -55,6 +55,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                       icon: Icon(
                         Icons.arrow_back_rounded,
                         size: 30,
+                        color: Theme.of(context).focusColor,
                       ),
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -62,9 +63,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                     ),
                     Text(
                       'Add Coin',
-                      style: TextStyle(
-                        fontSize: 25,
-                      ),
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Icon(
                       Icons.arrow_forward_rounded,
@@ -79,23 +78,19 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Step 1– Select your coin',
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       )
                     : Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Step 2– Fill transaction details',
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
                 Divider(
+                  color: Theme.of(context).textTheme.bodyMedium!.color,
                   thickness: 1,
-                  color: Colors.white,
                 ),
                 SizedBox(height: 10),
                 _coinSelected == false
@@ -122,7 +117,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                     vertical: 10,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Colors.grey[700],
+                                    color: Theme.of(context).primaryColorLight,
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: GestureDetector(
@@ -131,7 +126,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                         Expanded(
                                           flex: 1,
                                           child: CircleAvatar(
-                                            backgroundColor: Colors.black,
+                                            backgroundColor: Theme.of(context).primaryColor,
                                             radius: 20,
                                             child: ClipOval(
                                               child: Image.network(
@@ -148,9 +143,9 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                           flex: 3,
                                           child: Text(
                                             snapshot.data[index].name,
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                            ),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium,
                                           ),
                                         ),
                                         Expanded(
@@ -159,11 +154,12 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                             snapshot.data[index].symbol
                                                 .toString()
                                                 .toUpperCase(),
-                                            style: TextStyle(
-                                              color: Colors.white70,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium!
+                                                .copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                           ),
                                         ),
                                       ],
@@ -190,15 +186,11 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                             children: [
                               Text(
                                 'Coin:',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               Text(
                                 _selectedCoinName,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                             ],
                           ),
@@ -208,9 +200,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                             children: [
                               Text(
                                 '*Price per coin:',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               Container(
                                 width: 100,
@@ -218,16 +208,11 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                   controller: _buyPrice,
                                   decoration: InputDecoration(
                                     hintText: '\$1000.00',
-                                    hintStyle: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                    ),
+                                    hintStyle:
+                                        Theme.of(context).textTheme.bodyMedium,
                                   ),
                                   keyboardType: TextInputType.number,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                   onChanged: (newValue) {
                                     priceOnChanged = newValue;
                                   },
@@ -240,9 +225,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                             children: [
                               Text(
                                 '*Quantity:',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               Container(
                                 width: 100,
@@ -250,16 +233,11 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                   controller: _quantity,
                                   decoration: InputDecoration(
                                     hintText: '0.35',
-                                    hintStyle: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                    ),
+                                    hintStyle:
+                                        Theme.of(context).textTheme.bodyMedium,
                                   ),
                                   keyboardType: TextInputType.number,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                   onChanged: (newValue) {
                                     quantityOnChanged = newValue;
                                   },
@@ -267,41 +245,18 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                               )
                             ],
                           ),
-                          // SizedBox(height: 20),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //   children: [
-                          //     Text(
-                          //       'Invested amount:',
-                          //       style: TextStyle(
-                          //         fontSize: 18,
-                          //       ),
-                          //     ),
-                          //     Text(
-                          //       '\$${double.parse(priceOnChanged)*double.parse(quantityOnChanged)}',
-                          //       style: TextStyle(
-                          //         fontSize: 18,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
                           SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Transaction Date:',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               OutlinedButton(
                                 child: Text(
                                   '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                                 onPressed: () {
                                   _selectDate(context);
@@ -311,14 +266,15 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                           ),
                           SizedBox(height: 20),
                           MaterialButton(
-                            color: Theme.of(context).primaryColor,
+                            color: Theme.of(context).focusColor,
                             child: Text(
                               'Add',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                             ),
                             onPressed: (_quantity.text != '' &&
                                         _buyPrice.text != '' &&

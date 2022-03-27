@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/theme_provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -13,6 +16,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String currencyDropdownValue = 'USD';
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return SafeArea(
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -22,35 +27,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             Text(
               'Settings',
-              style: TextStyle(
-                fontSize: 25,
-              ),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  Divider(color: Colors.white),
+                  Divider(
+                    color: Theme.of(context).textTheme.bodyMedium!.color,
+                    thickness: 1,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         'Language',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       DropdownButton<String>(
                         value: languageDropdownValue,
-                        icon: const Icon(Icons.arrow_downward),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
+                        icon: Icon(Icons.arrow_downward),
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize:
+                              Theme.of(context).textTheme.bodyMedium!.fontSize,
                         ),
+                        dropdownColor: Theme.of(context).primaryColorLight,
                         underline: Container(
                           height: 1,
-                          color: Colors.white,
                         ),
                         onChanged: (String? newValue) {
                           setState(() {
@@ -61,68 +66,66 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value),
+                            child: Text(
+                              value,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
                           );
                         }).toList(),
                       ),
                     ],
                   ),
-                  Divider(color: Colors.white),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Appereance',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                      DropdownButton<String>(
-                        value: appereanceDropdownValue,
-                        icon: const Icon(Icons.arrow_downward),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                        underline: Container(
-                          height: 1,
-                          color: Colors.white,
-                        ),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            appereanceDropdownValue = newValue!;
-                          });
-                        },
-                        items: <String>['Dark Mode', 'Light Mode']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    ],
+                  Divider(
+                    color: Theme.of(context).textTheme.bodyMedium!.color,
+                    thickness: 1,
                   ),
-                  Divider(color: Colors.white),
+                  SwitchListTile(
+                    title: Text(
+                      themeProvider.isDarkMode == true
+                          ? 'Dark Mode'
+                          : 'Light Mode',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color:
+                                Theme.of(context).textTheme.bodyMedium!.color,
+                          ),
+                    ),
+                    secondary: themeProvider.isDarkMode == true
+                        ? Icon(
+                            Icons.dark_mode_rounded,
+                            color: Theme.of(context).focusColor,
+                          )
+                        : Icon(
+                            Icons.light_mode,
+                            color: Colors.amber,
+                          ),
+                    activeColor: Theme.of(context).focusColor,
+                    inactiveThumbColor: Colors.amber,
+                    inactiveTrackColor: Colors.amber.withOpacity(0.7),
+                    value: themeProvider.isDarkMode,
+                    onChanged: (value) {
+                      final provider =
+                          Provider.of<ThemeProvider>(context, listen: false);
+                      provider.toggleTheme(value);
+                    },
+                  ),
+                  Divider(
+                    color: Theme.of(context).textTheme.bodyMedium!.color,
+                    thickness: 1,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         'Currency',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       DropdownButton<String>(
                         value: currencyDropdownValue,
                         icon: const Icon(Icons.arrow_downward),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        dropdownColor: Theme.of(context).primaryColorLight,
                         underline: Container(
                           height: 1,
-                          color: Colors.white,
                         ),
                         onChanged: (String? newValue) {
                           setState(() {
@@ -133,7 +136,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value),
+                            child: Text(
+                              value,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
                           );
                         }).toList(),
                       ),
