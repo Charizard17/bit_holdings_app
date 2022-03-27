@@ -19,28 +19,6 @@ class MyApp extends StatelessWidget {
       title: 'BitHoldings App',
       theme: ThemeData.dark().copyWith(
         primaryColor: Color(0XFF59B5B2),
-        textTheme: TextTheme(
-          headline4: TextStyle(
-            color: Colors.white,
-            fontSize: 30,
-          ),
-          headline5: TextStyle(
-            color: Colors.white,
-            fontSize: 25,
-          ),
-          headline6: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-          ),
-          bodyText1: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-          ),
-          bodyText2: TextStyle(
-            color: Colors.white,
-            fontSize: 14,
-          ),
-        ),
         buttonTheme: ButtonThemeData(
           minWidth: 300,
           height: 70,

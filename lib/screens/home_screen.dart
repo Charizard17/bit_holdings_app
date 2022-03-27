@@ -16,7 +16,9 @@ class HomeScreen extends StatelessWidget {
           children: [
             Text(
               'Latest Quick News',
-              style: Theme.of(context).textTheme.headline5,
+              style: TextStyle(
+                fontSize: 25,
+              ),
             ),
             SizedBox(height: 20),
             Container(

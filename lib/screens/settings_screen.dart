@@ -22,7 +22,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             Text(
               'Settings',
-              style: Theme.of(context).textTheme.headline5,
+              style: TextStyle(
+                fontSize: 25,
+              ),
             ),
             SizedBox(height: 20),
             Container(

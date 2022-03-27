@@ -26,7 +26,9 @@ class NewsCardWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: Theme.of(context).textTheme.bodyText1,
+            style: TextStyle(
+              fontSize: 18,
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -36,7 +38,9 @@ class NewsCardWidget extends StatelessWidget {
                 height: 80,
                 child: Text(
                   bodyText,
-                  style: Theme.of(context).textTheme.bodyText2,
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
               ),
               Container(

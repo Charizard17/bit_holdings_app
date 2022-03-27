@@ -62,7 +62,9 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                     ),
                     Text(
                       'Add Coin',
-                      style: Theme.of(context).textTheme.headline5,
+                      style: TextStyle(
+                        fontSize: 25,
+                      ),
                     ),
                     Icon(
                       Icons.arrow_forward_rounded,
