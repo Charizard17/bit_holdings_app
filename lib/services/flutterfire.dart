@@ -41,6 +41,22 @@ class FlutterFire {
     }
   }
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<bool> deleteUser(String email, String password) async {
+    try {
+      User user = await _auth.currentUser!;
+      AuthCredential credentials =
+          EmailAuthProvider.credential(email: email, password: password);
+      await user.reauthenticateWithCredential(credentials);
+      await user.delete();
+      return true;
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
+  }
+
   Future<bool> addCoin(
       String coin, String quantity, String buyPrice, String date) async {
     try {

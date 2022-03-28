@@ -1,3 +1,4 @@
+import 'package:bit_holdings_app/screens/delete_account_screen.dart';
 import 'package:bit_holdings_app/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -213,6 +214,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               Expanded(child: Container()),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: MaterialButton(
+                  color: Colors.red,
+                  child: Text(
+                    'Delete Account',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  onPressed: () async {
+                    // await _flutterFire.deleteUser();
+                    // bool shouldNavigate = await _flutterFire.deleteUser();
+                    // if (shouldNavigate == true) {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            DeleteAccountScreen(),
+                      ),
+                    );
+                    // }
+                  },
+                ),
+              ),
+              SizedBox(height: 40),
               Container(
                 margin: EdgeInsets.only(bottom: 50),
                 padding: EdgeInsets.symmetric(horizontal: 30),
