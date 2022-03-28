@@ -101,15 +101,37 @@ class _SignInScreenState extends State<SignInScreen> {
               ],
             ),
             SizedBox(height: 20),
-            MaterialButton(
-              color: Theme.of(context).focusColor,
-              child: Text(
-                'Sign in with Google',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
+            Stack(
+              children: [
+                MaterialButton(
+                  color: Theme.of(context).focusColor,
+                  child: Text(
+                    'Sign in with Google',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  onPressed: () {},
+                ),
+                Positioned(
+                  top: 15,
+                  right: 0,
+                  child: RotationTransition(
+                    turns: AlwaysStoppedAnimation(30 / 360),
+                    child: Container(
+                      color: Colors.red.withOpacity(0.5),
+                      child: Text(
+                        'Coming soon',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-              ),
-              onPressed: () {},
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 30),
             RichText(

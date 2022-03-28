@@ -44,49 +44,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       color: Theme.of(context).textTheme.bodyMedium!.color,
                       thickness: 1,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Language',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        DropdownButton<String>(
-                          value: languageDropdownValue,
-                          icon: Icon(Icons.arrow_downward),
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .fontSize,
-                          ),
-                          dropdownColor: Theme.of(context).primaryColorLight,
-                          underline: Container(
-                            height: 1,
-                          ),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              languageDropdownValue = newValue!;
-                            });
-                          },
-                          items: <String>['English', 'German', 'Turkish']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    ),
-                    Divider(
-                      color: Theme.of(context).textTheme.bodyMedium!.color,
-                      thickness: 1,
-                    ),
                     SwitchListTile(
                       title: Text(
                         themeProvider.isDarkMode == true
@@ -120,36 +77,135 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       color: Theme.of(context).textTheme.bodyMedium!.color,
                       thickness: 1,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Stack(
                       children: [
-                        Text(
-                          'Currency',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        DropdownButton<String>(
-                          value: currencyDropdownValue,
-                          icon: const Icon(Icons.arrow_downward),
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          dropdownColor: Theme.of(context).primaryColorLight,
-                          underline: Container(
-                            height: 1,
-                          ),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              currencyDropdownValue = newValue!;
-                            });
-                          },
-                          items: <String>['USD', 'EUR', 'GBP']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: Theme.of(context).textTheme.bodyMedium,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Language',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            DropdownButton<String>(
+                              value: languageDropdownValue,
+                              icon: Icon(Icons.arrow_downward),
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .fontSize,
                               ),
-                            );
-                          }).toList(),
+                              dropdownColor:
+                                  Theme.of(context).primaryColorLight,
+                              underline: Container(
+                                height: 1,
+                              ),
+                              onChanged: null,
+                              // onChanged: (String? newValue) {
+                              //   setState(() {
+                              //     languageDropdownValue = newValue!;
+                              //   });
+                              // },
+                              items: <String>[
+                                'English',
+                                'German',
+                                'Turkish'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ],
+                        ),
+                        Positioned(
+                          top: 15,
+                          right: 0,
+                          child: RotationTransition(
+                            turns: AlwaysStoppedAnimation(30 / 360),
+                            child: Container(
+                              color: Colors.red.withOpacity(0.5),
+                              child: Text(
+                                'Coming soon',
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      color: Theme.of(context).textTheme.bodyMedium!.color,
+                      thickness: 1,
+                    ),
+                    Stack(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Currency',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            DropdownButton<String>(
+                              value: currencyDropdownValue,
+                              icon: const Icon(Icons.arrow_downward),
+                              style: Theme.of(context).textTheme.bodyMedium,
+                              dropdownColor:
+                                  Theme.of(context).primaryColorLight,
+                              underline: Container(
+                                height: 1,
+                              ),
+                              onChanged: null,
+                              // onChanged: (String? newValue) {
+                              //   setState(() {
+                              //     currencyDropdownValue = newValue!;
+                              //   });
+                              // },
+                              items: <String>[
+                                'USD',
+                                'EUR',
+                                'GBP'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ],
+                        ),
+                        Positioned(
+                          top: 15,
+                          right: 0,
+                          child: RotationTransition(
+                            turns: AlwaysStoppedAnimation(30 / 360),
+                            child: Container(
+                              color: Colors.red.withOpacity(0.5),
+                              child: Text(
+                                'Coming soon',
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
