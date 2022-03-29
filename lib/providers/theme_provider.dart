@@ -15,8 +15,6 @@ class ThemeProvider extends ChangeNotifier {
   }
 }
 
-// Color(0XFF59B5B2)
-
 class CustomThemeData {
   // LIGHT THEME DATA
   static final lightThemeData = ThemeData(
@@ -25,6 +23,7 @@ class CustomThemeData {
     primaryColorLight: Color.fromARGB(183, 186, 186, 186),
     focusColor: Color(0XFF59B5B2),
     hintColor: Colors.black,
+    errorColor: Colors.red,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Color.fromARGB(179, 203, 203, 203),
     ),

@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
             }
 
             return MaterialApp(
-              title: 'BitHoldings App',
+              title: 'Bit Holdings',
               themeMode: themeProvider.themeMode,
               theme: CustomThemeData.lightThemeData,
               darkTheme: CustomThemeData.darkThemeData,

@@ -131,7 +131,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           child: RotationTransition(
                             turns: AlwaysStoppedAnimation(30 / 360),
                             child: Container(
-                              color: Colors.red.withOpacity(0.5),
+                              color: Theme.of(context).errorColor.withOpacity(0.5),
                               child: Text(
                                 'Coming soon',
                                 style: TextStyle(
@@ -196,7 +196,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           child: RotationTransition(
                             turns: AlwaysStoppedAnimation(30 / 360),
                             child: Container(
-                              color: Colors.red.withOpacity(0.5),
+                              color: Theme.of(context).errorColor.withOpacity(0.5),
                               child: Text(
                                 'Coming soon',
                                 style: TextStyle(
@@ -217,7 +217,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: MaterialButton(
-                  color: Colors.red,
+                  color: Theme.of(context).errorColor,
                   child: Text(
                     'Delete Account',
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(

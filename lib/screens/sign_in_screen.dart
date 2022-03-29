@@ -119,7 +119,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: RotationTransition(
                     turns: AlwaysStoppedAnimation(30 / 360),
                     child: Container(
-                      color: Colors.red.withOpacity(0.5),
+                      color: Theme.of(context).errorColor.withOpacity(0.5),
                       child: Text(
                         'Coming soon',
                         style: TextStyle(

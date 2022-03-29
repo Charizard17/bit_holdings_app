@@ -73,7 +73,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
             ),
             SizedBox(height: 20),
             MaterialButton(
-              color: Colors.red,
+              color: Theme.of(context).errorColor,
               child: Text(
                 'Delete Account',
                 style: Theme.of(context)
