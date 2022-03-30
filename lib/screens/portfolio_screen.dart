@@ -67,8 +67,7 @@ class PortfolioScreen extends StatelessWidget {
                                   coin.name ==
                                   document.id.replaceAll('-', ' '));
                           totalInvested += double.parse(
-                                  document.get('Quantity').toString()) *
-                              double.parse(document.get('Price').toString());
+                              document.get('TotalInvested').toString());
                           currentValue += double.parse(
                                   document.get('Quantity').toString()) *
                               double.parse(tempCoin.price.toString());
@@ -200,9 +199,9 @@ class PortfolioScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
-                                      width: 1,
-                                      color: Theme.of(context).primaryColorLight
-                                    ),
+                                        width: 1,
+                                        color: Theme.of(context)
+                                            .primaryColorLight),
                                   ),
                                 ),
                                 child: Slidable(
@@ -237,6 +236,8 @@ class PortfolioScreen extends StatelessWidget {
                                     name: document.id,
                                     buyPrice: document['Price'].toString(),
                                     quantity: document['Quantity'].toString(),
+                                    totalInvested:
+                                        document['TotalInvested'].toString(),
                                     coin: coin,
                                   ),
                                 ),

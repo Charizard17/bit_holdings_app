@@ -63,6 +63,7 @@ class FlutterFire {
       String uid = FirebaseAuth.instance.currentUser!.uid;
       var value = double.parse(quantity);
       var price = double.parse(buyPrice);
+      var totalInvested = value * price;
       DocumentReference documentReference = FirebaseFirestore.instance
           .collection('Users')
           .doc(uid)
@@ -72,6 +73,7 @@ class FlutterFire {
         DocumentSnapshot snapshot = await transaction.get(documentReference);
         if (!snapshot.exists) {
           documentReference.set({
+            'TotalInvested': totalInvested,
             'Quantity': value,
             'Price': price,
             'Date': date,
@@ -79,7 +81,9 @@ class FlutterFire {
           return true;
         }
         double newQuantity = snapshot['Quantity'] + value;
+        double newTotalInvested = snapshot['TotalInvested'] + totalInvested;
         transaction.update(documentReference, {
+          'TotalInvested': newTotalInvested,
           'Quantity': newQuantity,
           'Price': price,
           'Date': date,

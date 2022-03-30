@@ -45,22 +45,6 @@ class MyApp extends StatelessWidget {
           builder: (BuildContext context,
               AsyncSnapshot<QuerySnapshot> streamSnapshot) {
             if (!streamSnapshot.hasData) {
-              // return MaterialApp(
-              //   title: 'BitHoldings App',
-              //   themeMode: themeProvider.themeMode,
-              //   theme: CustomThemeData.lightThemeData,
-              //   darkTheme: CustomThemeData.darkThemeData,
-              //   home: StreamBuilder(
-              //     stream: FirebaseAuth.instance.authStateChanges(),
-              //     builder: (context, snapshot) {
-              //       if (snapshot.hasData) {
-              //         return MainView();
-              //       } else {
-              //         return SignInScreen();
-              //       }
-              //     },
-              //   ),
-              // );
               return Container(
                 color: CustomThemeData.darkThemeData.focusColor,
                 child: Center(

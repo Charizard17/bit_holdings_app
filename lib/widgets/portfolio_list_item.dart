@@ -9,12 +9,14 @@ class PortfolioListItem extends StatefulWidget {
   final String name;
   final String buyPrice;
   final String quantity;
+  final String totalInvested;
   final Coin coin;
   const PortfolioListItem({
     Key? key,
     required this.name,
     required this.buyPrice,
     required this.quantity,
+    required this.totalInvested,
     required this.coin,
   }) : super(key: key);
 
@@ -91,7 +93,8 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                       child: Text(
                         '%${((double.parse(widget.coin.price) - double.parse(widget.buyPrice)) / double.parse(widget.buyPrice) * 100).toStringAsFixed(2)}',
                         style: TextStyle(
-                          fontSize: Theme.of(context).textTheme.bodySmall!.fontSize,
+                          fontSize:
+                              Theme.of(context).textTheme.bodySmall!.fontSize,
                           color: ((double.parse(widget.coin.price) -
                                           double.parse(widget.buyPrice)) /
                                       double.parse(widget.buyPrice) *
@@ -106,9 +109,10 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                     FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        '\$${((double.parse(widget.coin.price) - double.parse(widget.buyPrice)) * double.parse(widget.quantity)).toStringAsFixed(2)}',
+                        '\$${(double.parse(widget.coin.price) * double.parse(widget.quantity) - double.parse(widget.totalInvested)).toStringAsFixed(2)}',
                         style: TextStyle(
-                          fontSize: Theme.of(context).textTheme.bodySmall!.fontSize,
+                          fontSize:
+                              Theme.of(context).textTheme.bodySmall!.fontSize,
                           color: ((double.parse(widget.coin.price) -
                                           double.parse(widget.buyPrice)) *
                                       double.parse(widget.quantity)) >
