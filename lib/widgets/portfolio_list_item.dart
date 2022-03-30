@@ -94,13 +94,14 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                     FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        '%${((double.parse(widget.coin.price) - double.parse(widget.buyPrice)) / double.parse(widget.buyPrice) * 100).toStringAsFixed(2)}',
+                        '%${((double.parse(widget.coin.price) * double.parse(widget.quantity) - double.parse(widget.totalInvested)) / double.parse(widget.totalInvested) * 100).toStringAsFixed(2)}',
                         style: TextStyle(
                           fontSize:
                               Theme.of(context).textTheme.bodySmall!.fontSize,
-                          color: ((double.parse(widget.coin.price) -
-                                          double.parse(widget.buyPrice)) /
-                                      double.parse(widget.buyPrice) *
+                          color: ((double.parse(widget.coin.price) *
+                                              double.parse(widget.quantity) -
+                                          double.parse(widget.totalInvested)) /
+                                      double.parse(widget.totalInvested) *
                                       100) >
                                   0
                               ? Colors.green
