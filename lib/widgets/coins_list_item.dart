@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CoinsListItem extends StatelessWidget {
   final String rank;
@@ -19,6 +20,8 @@ class CoinsListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = new NumberFormat.simpleCurrency();
+
     return Container(
       margin: const EdgeInsets.only(
         bottom: 20,
@@ -77,9 +80,12 @@ class CoinsListItem extends StatelessWidget {
           Expanded(
             flex: 3,
             child: FittedBox(
+              alignment: Alignment.centerRight,
               fit: BoxFit.scaleDown,
               child: Text(
-                '\$ $price',
+                double.parse(price) < 0.1
+                    ? '\$${price}'
+                    : '${formatCurrency.format(double.parse(price))}',
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.right,
               ),

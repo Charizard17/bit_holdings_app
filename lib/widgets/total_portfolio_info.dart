@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TotalPortfolioInfo extends StatelessWidget {
   final String totalInvested;
@@ -11,6 +12,8 @@ class TotalPortfolioInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = new NumberFormat.simpleCurrency();
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(15),
@@ -60,7 +63,7 @@ class TotalPortfolioInfo extends StatelessWidget {
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
-                      '\$${totalInvested}',
+                      '${formatCurrency.format(double.parse(totalInvested))}',
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
@@ -76,7 +79,7 @@ class TotalPortfolioInfo extends StatelessWidget {
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
-                      '\$${currentValue}',
+                      '${formatCurrency.format(double.parse(currentValue))}',
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),

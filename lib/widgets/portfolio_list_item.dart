@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../models/coin.dart';
 import '../services/api_methods.dart';
@@ -27,6 +28,8 @@ class PortfolioListItem extends StatefulWidget {
 class _PortfolioListItemState extends State<PortfolioListItem> {
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = new NumberFormat.simpleCurrency();
+
     return Container(
       child: Column(
         children: [
@@ -67,7 +70,7 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                     FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        '\$${(double.parse(widget.quantity) * double.parse(widget.coin.price)).toStringAsFixed(2)}',
+                        '${formatCurrency.format(double.parse(widget.quantity) * double.parse(widget.coin.price))}',
                         style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.right,
                       ),
@@ -109,13 +112,13 @@ class _PortfolioListItemState extends State<PortfolioListItem> {
                     FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        '\$${(double.parse(widget.coin.price) * double.parse(widget.quantity) - double.parse(widget.totalInvested)).toStringAsFixed(2)}',
+                        '${formatCurrency.format(double.parse(widget.coin.price) * double.parse(widget.quantity) - double.parse(widget.totalInvested))}',
                         style: TextStyle(
                           fontSize:
                               Theme.of(context).textTheme.bodySmall!.fontSize,
-                          color: ((double.parse(widget.coin.price) -
-                                          double.parse(widget.buyPrice)) *
-                                      double.parse(widget.quantity)) >
+                          color: (double.parse(widget.coin.price) *
+                                          double.parse(widget.quantity) -
+                                      double.parse(widget.totalInvested)) >
                                   0
                               ? Colors.green
                               : Colors.red,
