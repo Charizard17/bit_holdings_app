@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
+import '../models/coin.dart';
 import '../services/flutterfire.dart';
 import '../services/api_methods.dart';
 
@@ -15,7 +17,7 @@ class AddCoinScreen extends StatefulWidget {
 
 class _AddCoinScreenState extends State<AddCoinScreen> {
   bool _coinSelected = false;
-  String _selectedCoinName = '';
+  Coin _selectedCoin = Coin(1, '', '', '', '', '');
   String priceOnChanged = '';
   String quantityOnChanged = '';
   TextEditingController _buyPrice = TextEditingController();
@@ -24,6 +26,8 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = new NumberFormat.simpleCurrency();
+
     Future<void> _selectDate(BuildContext context) async {
       DateTime? selectedDate = await showDatePicker(
         context: context,
@@ -126,7 +130,8 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                         Expanded(
                                           flex: 1,
                                           child: CircleAvatar(
-                                            backgroundColor: Theme.of(context).primaryColor,
+                                            backgroundColor:
+                                                Theme.of(context).primaryColor,
                                             radius: 20,
                                             child: ClipOval(
                                               child: Image.network(
@@ -166,8 +171,10 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                     ),
                                     onTap: () async {
                                       setState(() {
-                                        this._selectedCoinName =
-                                            snapshot.data[index].name;
+                                        this._selectedCoin =
+                                            snapshot.data[index];
+                                        this._buyPrice.text =
+                                            snapshot.data[index].price;
                                       });
                                       _coinSelected = true;
                                     },
@@ -186,11 +193,26 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                             children: [
                               Text(
                                 'Coin:',
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
-                              Text(
-                                _selectedCoinName,
-                                style: Theme.of(context).textTheme.bodyMedium,
+                              Container(
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      width: 2,
+                                      color: Theme.of(context).hintColor,
+                                    ),
+                                  ),
+                                ),
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    _selectedCoin.name,
+                                    style: Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -199,20 +221,30 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                '*Price per coin:',
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                'Price per coin: (\$)',
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               Container(
                                 width: 100,
                                 child: TextField(
                                   controller: _buyPrice,
                                   decoration: InputDecoration(
-                                    hintText: '\$1000.00',
-                                    hintStyle:
-                                        Theme.of(context).textTheme.bodyMedium,
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        width: 2,
+                                        color: Theme.of(context).focusColor,
+                                      ),
+                                    ),
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        width: 2,
+                                        color: Theme.of(context).hintColor,
+                                      ),
+                                    ),
                                   ),
+                                  textAlign: TextAlign.right,
                                   keyboardType: TextInputType.number,
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                   onChanged: (newValue) {
                                     priceOnChanged = newValue;
                                   },
@@ -220,12 +252,13 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                               )
                             ],
                           ),
+                          SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 '*Quantity:',
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               Container(
                                 width: 100,
@@ -234,10 +267,23 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                   decoration: InputDecoration(
                                     hintText: '0.35',
                                     hintStyle:
-                                        Theme.of(context).textTheme.bodyMedium,
+                                        Theme.of(context).textTheme.bodyLarge,
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        width: 2,
+                                        color: Theme.of(context).focusColor,
+                                      ),
+                                    ),
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        width: 2,
+                                        color: Theme.of(context).hintColor,
+                                      ),
+                                    ),
                                   ),
+                                  textAlign: TextAlign.right,
                                   keyboardType: TextInputType.number,
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                   onChanged: (newValue) {
                                     quantityOnChanged = newValue;
                                   },
@@ -251,12 +297,18 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                             children: [
                               Text(
                                 'Transaction Date:',
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               OutlinedButton(
                                 child: Text(
                                   '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                                style: OutlinedButton.styleFrom(
+                                  side: BorderSide(
+                                    width: 2.0,
+                                    color: Theme.of(context).focusColor,
+                                  ),
                                 ),
                                 onPressed: () {
                                   _selectDate(context);
@@ -264,14 +316,14 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 30),
                           MaterialButton(
                             color: Theme.of(context).focusColor,
                             child: Text(
                               'Add',
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyMedium!
+                                  .bodyLarge!
                                   .copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -284,7 +336,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                     true
                                 ? () async {
                                     await _flutterFire.addCoin(
-                                        _selectedCoinName.replaceAll(' ', '-'),
+                                        _selectedCoin.name.replaceAll(' ', '-'),
                                         _quantity.text,
                                         _buyPrice.text,
                                         _selectedDate.toString());
@@ -294,7 +346,6 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                           ),
                         ],
                       ),
-                SizedBox(height: 20),
               ],
             ),
           ),
