@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/coin.dart';
-import '../services/api_methods.dart';
-
-ApiMethods _apiMethods = ApiMethods();
 
 class PortfolioListItem extends StatefulWidget {
   final String name;

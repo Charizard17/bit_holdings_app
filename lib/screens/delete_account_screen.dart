@@ -1,5 +1,4 @@
 import 'package:bit_holdings_app/screens/main_view.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'sign_in_screen.dart';

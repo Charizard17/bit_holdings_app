@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'providers/theme_provider.dart';
 import 'screens/main_view.dart';
