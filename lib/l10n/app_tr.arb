@@ -5,5 +5,21 @@
     "language": "Dil",
     "currency": "Para Birimi",
     "deleteAccount": "Hesabı Sil",
-    "signOut": "Oturumu Kapat"
+    "signOut": "Oturumu Kapat",
+    "portfolio": "Portföy",
+    "change": "Değişim",
+    "investedAmount": "Yatırılan Tutar",
+    "currentValue": "Mevcut Değer",
+    "yourAssets": "Varlıkların",
+    "coin": "Coin",
+    "holdings": "Varlıklar",
+    "profitLoss": "Kâr/Zarar",
+    "addCoin": "Coin Ekle",
+    "step1": "Adım 1 – Coininizi seçin",
+    "step2": "Adım 2 – İşlem detaylarını doldurun",
+    "pricePerCoin": "Coin başına fiyat",
+    "quantity": "Miktar",
+    "txDate": "İşlem Tarihi",
+    "add": "Ekle",
+    "deleteTx": "İşlemi Sil"
 }

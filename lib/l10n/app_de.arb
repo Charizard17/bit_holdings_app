@@ -5,5 +5,21 @@
     "language": "Sprache",
     "currency": "Währung",
     "deleteAccount": "Konto Löschen",
-    "signOut": "Ausloggen"
+    "signOut": "Ausloggen",
+    "portfolio": "Portfolio",
+    "change": "Ändern",
+    "investedAmount": "Eingezahlter Betrag",
+    "currentValue": "Aktueller Wert",
+    "yourAssets": "Ihr Vermögen",
+    "coin": "Coin",
+    "holdings": "Vermögen",
+    "profitLoss": "Profit/Verlust",
+    "addCoin": "Coin Hinzufügen",
+    "step1": "Schritt 1 – Wählen Sie Ihren Coin aus",
+    "step2": "Schritt 2 – Transaktionsdetails eingeben",
+    "pricePerCoin": "Preis pro Coin",
+    "quantity": "Quantität",
+    "txDate": "Transaktionsdatum",
+    "add": "Hinzufügen",
+    "deleteTx": "Tx löschen"
 }

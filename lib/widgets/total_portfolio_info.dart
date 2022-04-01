@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TotalPortfolioInfo extends StatelessWidget {
   final String totalInvested;
@@ -12,6 +13,7 @@ class TotalPortfolioInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizationsContext = AppLocalizations.of(context)!;
     final formatCurrency = new NumberFormat.simpleCurrency();
 
     return Container(
@@ -28,14 +30,14 @@ class TotalPortfolioInfo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Portfolio',
+                appLocalizationsContext.portfolio,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    'Change',
+                    appLocalizationsContext.change,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   FittedBox(
@@ -57,7 +59,7 @@ class TotalPortfolioInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Invested Amount',
+                    appLocalizationsContext.investedAmount,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   FittedBox(
@@ -73,7 +75,7 @@ class TotalPortfolioInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    'Current Value',
+                    appLocalizationsContext.currentValue,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   FittedBox(

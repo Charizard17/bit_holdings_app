@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../services/api_methods.dart';
 import '../services/flutterfire.dart';
@@ -19,6 +20,8 @@ class PortfolioScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizationsContext = AppLocalizations.of(context)!;
+
     return SafeArea(
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -85,7 +88,7 @@ class PortfolioScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Your Assets',
+                    appLocalizationsContext.yourAssets,
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   SizedBox(
@@ -125,7 +128,7 @@ class PortfolioScreen extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Text(
-                      'Coin',
+                      appLocalizationsContext.coin,
                       style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.left,
                     ),
@@ -133,17 +136,24 @@ class PortfolioScreen extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: Text(
-                      'Holdings',
+                      appLocalizationsContext.holdings,
                       style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.right,
                     ),
                   ),
                   Expanded(
                     flex: 2,
-                    child: Text(
-                      'Profit/Loss',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                      textAlign: TextAlign.right,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 5),
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          appLocalizationsContext.profitLoss,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -215,7 +225,7 @@ class PortfolioScreen extends StatelessWidget {
                                           ),
                                         ),
                                         label: Text(
-                                          'Delete Tx',
+                                          appLocalizationsContext.deleteTx,
                                           style: TextStyle(
                                               fontSize: 16, color: Colors.red),
                                         ),

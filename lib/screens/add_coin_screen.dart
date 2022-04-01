@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/coin.dart';
 import '../services/flutterfire.dart';
@@ -26,6 +27,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizationsContext = AppLocalizations.of(context)!;
     final formatCurrency = new NumberFormat.simpleCurrency();
 
     Future<void> _selectDate(BuildContext context) async {
@@ -66,7 +68,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                       },
                     ),
                     Text(
-                      'Add Coin',
+                      appLocalizationsContext.addCoin,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Icon(
@@ -81,14 +83,14 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                     ? Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Step 1– Select your coin',
+                          appLocalizationsContext.step1,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       )
                     : Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Step 2– Fill transaction details',
+                          appLocalizationsContext.step2,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
@@ -192,7 +194,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Coin:',
+                                '${appLocalizationsContext.coin}:',
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               Container(
@@ -221,7 +223,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Price per coin: (\$)',
+                                '${appLocalizationsContext.pricePerCoin}: (\$)',
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               Container(
@@ -257,7 +259,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                '*Quantity:',
+                                '*${appLocalizationsContext.quantity}:',
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               Container(
@@ -296,7 +298,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Transaction Date:',
+                                '${appLocalizationsContext.txDate}:',
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               OutlinedButton(
@@ -320,7 +322,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                           MaterialButton(
                             color: Theme.of(context).focusColor,
                             child: Text(
-                              'Add',
+                              appLocalizationsContext.add,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!
