@@ -18,13 +18,13 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  String languageDropdownValue = 'English';
   String currencyDropdownValue = 'USD';
 
   @override
   Widget build(BuildContext context) {
     final appLocalizationsContext = AppLocalizations.of(context)!;
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final localeProvider = Provider.of<LocaleProvider>(context);
 
     return SafeArea(
       child: Container(
@@ -89,7 +89,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         DropdownButton<String>(
-                          value: languageDropdownValue,
+                          value: localeProvider.language,
                           icon: Icon(Icons.arrow_downward),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
@@ -103,9 +103,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             height: 1,
                           ),
                           onChanged: (String? newValue) {
-                            setState(() {
-                              languageDropdownValue = newValue!;
-                            });
+                            localeProvider.language = newValue!;
+                            setState(() {});
                           },
                           items: <String>[
                             'English',
@@ -119,10 +118,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               onTap: () {
-                                final provider = Provider.of<LocaleProvider>(
-                                    context,
-                                    listen: false);
-
                                 var locale = Locale('en', 'US');
                                 if (value == 'English') {
                                   locale = Locale('en', 'US');
@@ -133,7 +128,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 if (value == 'Türkçe') {
                                   locale = Locale('tr', 'TR');
                                 }
-                                provider.setLocale(locale);
+                                localeProvider.setLocale(locale);
                               },
                             );
                           }).toList(),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../l10n/l10n.dart';
 
 class LocaleProvider extends ChangeNotifier {
+  String language = 'English'; // can change in settings_screen
+
   Locale _locale = Locale('en', 'US');
 
   Locale get locale => _locale;
