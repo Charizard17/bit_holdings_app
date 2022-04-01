@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'sign_in_screen.dart';
 import '../services/flutterfire.dart';
@@ -19,6 +20,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizationsContext = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -28,7 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Sign Up',
+              appLocalizationsContext.signUp,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             SizedBox(height: 20),
@@ -74,7 +77,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             MaterialButton(
               color: Theme.of(context).focusColor,
               child: Text(
-                'Sign Up',
+                appLocalizationsContext.signUp,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
@@ -97,9 +100,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               text: TextSpan(
                 style: Theme.of(context).textTheme.bodySmall,
                 children: [
-                  TextSpan(text: 'Already have an account? '),
+                  TextSpan(text: '${appLocalizationsContext.alreadyHaveAnAccount} '),
                   TextSpan(
-                    text: 'Sign In',
+                    text: appLocalizationsContext.signIn,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context).focusColor,
                         ),

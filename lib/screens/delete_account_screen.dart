@@ -1,5 +1,6 @@
 import 'package:bit_holdings_app/screens/main_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'sign_in_screen.dart';
 import '../services/flutterfire.dart';
@@ -19,6 +20,8 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizationsContext = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -28,7 +31,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Delete Account',
+              appLocalizationsContext.deleteAccount,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             SizedBox(height: 20),
@@ -74,7 +77,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
             MaterialButton(
               color: Theme.of(context).errorColor,
               child: Text(
-                'Delete Account',
+                appLocalizationsContext.deleteAccount,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
@@ -97,7 +100,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               child: MaterialButton(
                 color: Theme.of(context).focusColor,
                 child: Text(
-                  'Nevermind',
+                  appLocalizationsContext.nevermind,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

@@ -1,6 +1,7 @@
 import 'package:bit_holdings_app/screens/main_view.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'sign_up_screen.dart';
 import '../services/flutterfire.dart';
@@ -20,6 +21,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizationsContext = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -29,7 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Sign In',
+              appLocalizationsContext.signIn,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             SizedBox(height: 20),
@@ -73,7 +76,7 @@ class _SignInScreenState extends State<SignInScreen> {
             MaterialButton(
               color: Theme.of(context).focusColor,
               child: Text(
-                'Sign In',
+                appLocalizationsContext.signIn,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -95,7 +98,7 @@ class _SignInScreenState extends State<SignInScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'OR',
+                  appLocalizationsContext.or,
                   style: Theme.of(context).textTheme.bodyLarge,
                 )
               ],
@@ -106,7 +109,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 MaterialButton(
                   color: Theme.of(context).focusColor,
                   child: Text(
-                    'Sign in with Google',
+                    appLocalizationsContext.signInWithGoogle,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -138,9 +141,9 @@ class _SignInScreenState extends State<SignInScreen> {
               text: TextSpan(
                 style: Theme.of(context).textTheme.bodySmall,
                 children: [
-                  TextSpan(text: "Don't have an account? "),
+                  TextSpan(text: "${appLocalizationsContext.dontHaveAnAccount} "),
                   TextSpan(
-                    text: 'Sign Up',
+                    text: appLocalizationsContext.signUp,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context).focusColor,
                         ),
