@@ -12,6 +12,7 @@
     "currentValue": "Aktueller Wert",
     "yourAssets": "Ihr Vermögen",
     "coin": "Coin",
+    "coins": "Coins",
     "holdings": "Vermögen",
     "profitLoss": "Profit/Verlust",
     "addCoin": "Coin Hinzufügen",
@@ -21,5 +22,7 @@
     "quantity": "Quantität",
     "txDate": "Transaktionsdatum",
     "add": "Hinzufügen",
-    "deleteTx": "Tx löschen"
+    "deleteTx": "Tx löschen",
+    "price": "Preis",
+    "h24": "24 Std"
 }

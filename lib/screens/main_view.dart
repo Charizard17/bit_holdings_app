@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'portfolio_screen.dart';
 import 'settings_screen.dart';
@@ -20,6 +21,8 @@ class _MainViewState extends State<MainView> {
   ];
   @override
   Widget build(BuildContext context) {
+    final appLocalizationsContext = AppLocalizations.of(context)!;
+
     void _onItemTapped(int value) {
       setState(() {
         _selectedIndex = value;
@@ -37,15 +40,15 @@ class _MainViewState extends State<MainView> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.list_rounded),
-            label: 'Coins',
+            label: appLocalizationsContext.coins,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pie_chart_outlined),
-            label: 'Portfolio',
+            label: appLocalizationsContext.portfolio,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings_outlined),
-            label: 'Settings',
+            label: appLocalizationsContext.settings,
           ),
         ],
         currentIndex: _selectedIndex,

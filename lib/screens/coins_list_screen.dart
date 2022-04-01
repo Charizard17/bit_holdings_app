@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/coins_list_item.dart';
 import '../services/api_methods.dart';
@@ -10,6 +11,8 @@ class CoinsListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizationsContext = AppLocalizations.of(context)!;
+
     return SafeArea(
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -33,23 +36,26 @@ class CoinsListScreen extends StatelessWidget {
                   Expanded(
                     flex: 5,
                     child: Text(
-                      'Coin',
+                      appLocalizationsContext.coin,
                       style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.center,
                     ),
                   ),
                   Expanded(
                     flex: 2,
-                    child: Text(
-                      '24h %',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                      textAlign: TextAlign.center,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        '${appLocalizationsContext.h24} %',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                   Expanded(
                     flex: 3,
                     child: Text(
-                      'Price',
+                      appLocalizationsContext.price,
                       style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.center,
                     ),

@@ -12,6 +12,7 @@
     "currentValue": "Current Value",
     "yourAssets": "Your Assets",
     "coin": "Coin",
+    "coins": "Coins",
     "holdings": "Holdings",
     "profitLoss": "Profit/Loss",
     "addCoin": "Add Coin",
@@ -21,5 +22,7 @@
     "quantity": "Quantity",
     "txDate": "Transaction Date",
     "add": "Add",
-    "deleteTx": "Delete Tx"
+    "deleteTx": "Delete Tx",
+    "price": "Price",
+    "h24": "24h"
 }
