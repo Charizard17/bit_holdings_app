@@ -1,8 +1,10 @@
-import 'package:bit_holdings_app/screens/delete_account_screen.dart';
-import 'package:bit_holdings_app/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'sign_in_screen.dart';
+import 'delete_account_screen.dart';
+import '../providers/locale_provider.dart';
 import '../providers/theme_provider.dart';
 import '../services/flutterfire.dart';
 
@@ -33,7 +35,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Column(
             children: [
               Text(
-                'Settings',
+                AppLocalizations.of(context)!.settings,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               SizedBox(height: 20),
@@ -102,12 +104,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               underline: Container(
                                 height: 1,
                               ),
-                              onChanged: null,
-                              // onChanged: (String? newValue) {
-                              //   setState(() {
-                              //     languageDropdownValue = newValue!;
-                              //   });
-                              // },
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  languageDropdownValue = newValue!;
+                                });
+                              },
                               items: <String>[
                                 'English',
                                 'German',
@@ -120,29 +121,48 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
+                                  onTap: () {
+                                    final provider =
+                                        Provider.of<LocaleProvider>(context,
+                                            listen: false);
+
+                                    var locale = Locale('en', 'US');
+                                    if (value == 'English') {
+                                      locale = Locale('en', 'US');
+                                    }
+                                    if (value == 'German') {
+                                      locale = Locale('de', 'DE');
+                                    }
+                                    if (value == 'Turkish') {
+                                      locale = Locale('tr', 'TR');
+                                    }
+                                    provider.setLocale(locale);
+                                    print(provider.locale);
+                                  },
                                 );
                               }).toList(),
                             ),
                           ],
                         ),
-                        Positioned(
-                          top: 15,
-                          right: 0,
-                          child: RotationTransition(
-                            turns: AlwaysStoppedAnimation(30 / 360),
-                            child: Container(
-                              color: Theme.of(context).errorColor.withOpacity(0.5),
-                              child: Text(
-                                'Coming soon',
-                                style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        // Positioned(
+                        //   top: 15,
+                        //   right: 0,
+                        //   child: RotationTransition(
+                        //     turns: AlwaysStoppedAnimation(30 / 360),
+                        //     child: Container(
+                        //       color:
+                        //           Theme.of(context).errorColor.withOpacity(0.5),
+                        //       child: Text(
+                        //         'Coming soon',
+                        //         style: TextStyle(
+                        //           color: Theme.of(context).primaryColor,
+                        //           fontSize: 10,
+                        //           fontWeight: FontWeight.bold,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                     Divider(
@@ -196,7 +216,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           child: RotationTransition(
                             turns: AlwaysStoppedAnimation(30 / 360),
                             child: Container(
-                              color: Theme.of(context).errorColor.withOpacity(0.5),
+                              color:
+                                  Theme.of(context).errorColor.withOpacity(0.5),
                               child: Text(
                                 'Coming soon',
                                 style: TextStyle(
