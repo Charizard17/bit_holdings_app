@@ -19,10 +19,11 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   String languageDropdownValue = 'English';
-  String appereanceDropdownValue = 'Dark Mode';
   String currencyDropdownValue = 'USD';
+
   @override
   Widget build(BuildContext context) {
+    final appLocalizationsContext = AppLocalizations.of(context)!;
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return SafeArea(
@@ -35,7 +36,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Column(
             children: [
               Text(
-                AppLocalizations.of(context)!.settings,
+                appLocalizationsContext.settings,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               SizedBox(height: 20),
@@ -50,8 +51,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     SwitchListTile(
                       title: Text(
                         themeProvider.isDarkMode == true
-                            ? 'Dark Mode'
-                            : 'Light Mode',
+                            ? appLocalizationsContext.darkMode
+                            : appLocalizationsContext.lightMode,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color:
                                   Theme.of(context).textTheme.bodyMedium!.color,
@@ -80,89 +81,63 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       color: Theme.of(context).textTheme.bodyMedium!.color,
                       thickness: 1,
                     ),
-                    Stack(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Language',
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            DropdownButton<String>(
-                              value: languageDropdownValue,
-                              icon: Icon(Icons.arrow_downward),
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .fontSize,
-                              ),
-                              dropdownColor:
-                                  Theme.of(context).primaryColorLight,
-                              underline: Container(
-                                height: 1,
-                              ),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  languageDropdownValue = newValue!;
-                                });
-                              },
-                              items: <String>[
-                                'English',
-                                'German',
-                                'Turkish'
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
-                                  ),
-                                  onTap: () {
-                                    final provider =
-                                        Provider.of<LocaleProvider>(context,
-                                            listen: false);
-
-                                    var locale = Locale('en', 'US');
-                                    if (value == 'English') {
-                                      locale = Locale('en', 'US');
-                                    }
-                                    if (value == 'German') {
-                                      locale = Locale('de', 'DE');
-                                    }
-                                    if (value == 'Turkish') {
-                                      locale = Locale('tr', 'TR');
-                                    }
-                                    provider.setLocale(locale);
-                                    print(provider.locale);
-                                  },
-                                );
-                              }).toList(),
-                            ),
-                          ],
+                        Text(
+                          appLocalizationsContext.language,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
-                        // Positioned(
-                        //   top: 15,
-                        //   right: 0,
-                        //   child: RotationTransition(
-                        //     turns: AlwaysStoppedAnimation(30 / 360),
-                        //     child: Container(
-                        //       color:
-                        //           Theme.of(context).errorColor.withOpacity(0.5),
-                        //       child: Text(
-                        //         'Coming soon',
-                        //         style: TextStyle(
-                        //           color: Theme.of(context).primaryColor,
-                        //           fontSize: 10,
-                        //           fontWeight: FontWeight.bold,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
+                        DropdownButton<String>(
+                          value: languageDropdownValue,
+                          icon: Icon(Icons.arrow_downward),
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .fontSize,
+                          ),
+                          dropdownColor: Theme.of(context).primaryColorLight,
+                          underline: Container(
+                            height: 1,
+                          ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              languageDropdownValue = newValue!;
+                            });
+                          },
+                          items: <String>[
+                            'English',
+                            'Deutsch',
+                            'Türkçe',
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                              onTap: () {
+                                final provider = Provider.of<LocaleProvider>(
+                                    context,
+                                    listen: false);
+
+                                var locale = Locale('en', 'US');
+                                if (value == 'English') {
+                                  locale = Locale('en', 'US');
+                                }
+                                if (value == 'Deutsch') {
+                                  locale = Locale('de', 'DE');
+                                }
+                                if (value == 'Türkçe') {
+                                  locale = Locale('tr', 'TR');
+                                }
+                                provider.setLocale(locale);
+                              },
+                            );
+                          }).toList(),
+                        ),
                       ],
                     ),
                     Divider(
@@ -175,7 +150,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Currency',
+                              appLocalizationsContext.currency,
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             DropdownButton<String>(
@@ -240,7 +215,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: MaterialButton(
                   color: Theme.of(context).errorColor,
                   child: Text(
-                    'Delete Account',
+                    appLocalizationsContext.deleteAccount,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -266,7 +241,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: MaterialButton(
                   color: Theme.of(context).focusColor,
                   child: Text(
-                    'Sign Out',
+                    appLocalizationsContext.signOut,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.bold,
                         ),

@@ -1,5 +1,9 @@
 {
     "settings": "Settings",
+    "lightMode": "Light Mode",
+    "darkMode": "Dark Mode",
     "language": "Language",
-    "currency": "Currency"
+    "currency": "Currency",
+    "deleteAccount": "Delete Account",
+    "signOut": "Sign Out"
 }

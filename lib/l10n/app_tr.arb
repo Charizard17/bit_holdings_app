@@ -1,5 +1,9 @@
 {
     "settings": "Ayarlar",
+    "lightMode": "Aydınlık Mod",
+    "darkMode": "Karanlık Mod",
     "language": "Dil",
-    "currency": "Para birimi"
+    "currency": "Para Birimi",
+    "deleteAccount": "Hesabı Sil",
+    "signOut": "Oturumu Kapat"
 }

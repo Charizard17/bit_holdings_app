@@ -1,5 +1,9 @@
 {
     "settings": "Einstellungen",
+    "lightMode": "Heller Modus",
+    "darkMode": "Dunkler Modus",
     "language": "Sprache",
-    "currency": "Währung"
+    "currency": "Währung",
+    "deleteAccount": "Konto Löschen",
+    "signOut": "Ausloggen"
 }
