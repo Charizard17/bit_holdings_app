@@ -93,49 +93,49 @@ class _SignInScreenState extends State<SignInScreen> {
                 }
               },
             ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  appLocalizationsContext.or,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                )
-              ],
-            ),
-            SizedBox(height: 20),
-            Stack(
-              children: [
-                MaterialButton(
-                  color: Theme.of(context).focusColor,
-                  child: Text(
-                    appLocalizationsContext.signInWithGoogle,
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  onPressed: () {},
-                ),
-                Positioned(
-                  top: 15,
-                  right: 0,
-                  child: RotationTransition(
-                    turns: AlwaysStoppedAnimation(30 / 360),
-                    child: Container(
-                      color: Theme.of(context).errorColor.withOpacity(0.5),
-                      child: Text(
-                        'Coming soon',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // SizedBox(height: 20),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Text(
+            //       appLocalizationsContext.or,
+            //       style: Theme.of(context).textTheme.bodyLarge,
+            //     )
+            //   ],
+            // ),
+            // SizedBox(height: 20),
+            // Stack(
+            //   children: [
+            //     MaterialButton(
+            //       color: Theme.of(context).focusColor,
+            //       child: Text(
+            //         appLocalizationsContext.signInWithGoogle,
+            //         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //       ),
+            //       onPressed: () {},
+            //     ),
+            //     Positioned(
+            //       top: 15,
+            //       right: 0,
+            //       child: RotationTransition(
+            //         turns: AlwaysStoppedAnimation(30 / 360),
+            //         child: Container(
+            //           color: Theme.of(context).errorColor.withOpacity(0.5),
+            //           child: Text(
+            //             'Coming soon',
+            //             style: TextStyle(
+            //               color: Theme.of(context).primaryColor,
+            //               fontSize: 10,
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             SizedBox(height: 30),
             RichText(
               text: TextSpan(
