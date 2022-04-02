@@ -71,15 +71,34 @@ class FlutterFire {
           .doc(coin);
       FirebaseFirestore.instance.runTransaction((transaction) async {
         DocumentSnapshot snapshot = await transaction.get(documentReference);
-        if (!snapshot.exists) {
-          documentReference.set({
-            'TotalInvested': totalInvested,
-            'Quantity': value,
-            'Price': price,
-            'Date': date,
-          });
-          return true;
-        }
+        documentReference.set({
+          'TotalInvested': totalInvested,
+          'Quantity': value,
+          'Price': price,
+          'Date': date,
+        });
+        return true;
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> updateCoin(
+      String coin, String quantity, String buyPrice, String date) async {
+    try {
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+      var value = double.parse(quantity);
+      var price = double.parse(buyPrice);
+      var totalInvested = value * price;
+      DocumentReference documentReference = FirebaseFirestore.instance
+          .collection('Users')
+          .doc(uid)
+          .collection('Coins')
+          .doc(coin);
+      FirebaseFirestore.instance.runTransaction((transaction) async {
+        DocumentSnapshot snapshot = await transaction.get(documentReference);
         double newQuantity = snapshot['Quantity'] + value;
         double newTotalInvested = snapshot['TotalInvested'] + totalInvested;
         transaction.update(documentReference, {

@@ -10,7 +10,11 @@ FlutterFire _flutterFire = FlutterFire();
 ApiMethods _apiMethods = ApiMethods();
 
 class AddCoinScreen extends StatefulWidget {
-  const AddCoinScreen({Key? key}) : super(key: key);
+  final List portfolioCoinsList;
+  const AddCoinScreen({
+    Key? key,
+    required this.portfolioCoinsList,
+  }) : super(key: key);
 
   @override
   State<AddCoinScreen> createState() => _AddCoinScreenState();
@@ -41,6 +45,14 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
         setState(() {
           _selectedDate = selectedDate;
         });
+      }
+    }
+
+    bool _isCoinExist(String coin) {
+      if (widget.portfolioCoinsList.contains(coin)) {
+        return true;
+      } else {
+        return false;
       }
     }
 
@@ -126,7 +138,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                     color: Theme.of(context).primaryColorLight,
                                     borderRadius: BorderRadius.circular(6),
                                   ),
-                                  child: GestureDetector(
+                                  child: InkWell(
                                     child: Row(
                                       children: [
                                         Expanded(
@@ -212,7 +224,8 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                   alignment: Alignment.centerRight,
                                   child: Text(
                                     _selectedCoin.name,
-                                    style: Theme.of(context).textTheme.bodyLarge,
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
                                   ),
                                 ),
                               ),
@@ -337,11 +350,22 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                             0) ==
                                     true
                                 ? () async {
-                                    await _flutterFire.addCoin(
-                                        _selectedCoin.name.replaceAll(' ', '-'),
-                                        _quantity.text,
-                                        _buyPrice.text,
-                                        _selectedDate.toString());
+                                    if (_isCoinExist(_selectedCoin.name) ==
+                                        true) {
+                                      await _flutterFire.updateCoin(
+                                          _selectedCoin.name
+                                              .replaceAll(' ', '-'),
+                                          _quantity.text,
+                                          _buyPrice.text,
+                                          _selectedDate.toString());
+                                    } else {
+                                      await _flutterFire.addCoin(
+                                          _selectedCoin.name
+                                              .replaceAll(' ', '-'),
+                                          _quantity.text,
+                                          _buyPrice.text,
+                                          _selectedDate.toString());
+                                    }
                                     Navigator.of(context).pop();
                                   }
                                 : () {},

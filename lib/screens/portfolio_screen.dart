@@ -15,9 +15,15 @@ import '../widgets/total_portfolio_info.dart';
 ApiMethods _apiMethods = ApiMethods();
 FlutterFire _flutterFire = FlutterFire();
 
-class PortfolioScreen extends StatelessWidget {
+class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({Key? key}) : super(key: key);
 
+  @override
+  State<PortfolioScreen> createState() => _PortfolioScreenState();
+}
+
+class _PortfolioScreenState extends State<PortfolioScreen> {
+  List _portfolioCoinsList = [];
   @override
   Widget build(BuildContext context) {
     final appLocalizationsContext = AppLocalizations.of(context)!;
@@ -72,6 +78,9 @@ class PortfolioScreen extends StatelessWidget {
                           currentValue += double.parse(
                                   document.get('Quantity').toString()) *
                               double.parse(tempCoin.price.toString());
+
+                          _portfolioCoinsList
+                              .add(document.id.replaceAll('-', ' '));
                         });
 
                         return TotalPortfolioInfo(
@@ -102,7 +111,9 @@ class PortfolioScreen extends StatelessWidget {
                       transitionDuration: Duration(milliseconds: 1000),
                       openBuilder:
                           (BuildContext context, VoidCallback closeContainer) =>
-                              AddCoinScreen(),
+                              AddCoinScreen(
+                        portfolioCoinsList: _portfolioCoinsList,
+                      ),
                       closedBuilder:
                           (BuildContext _, VoidCallback openContainer) {
                         return Container(
@@ -197,8 +208,8 @@ class PortfolioScreen extends StatelessWidget {
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             children: streamSnapshot.data!.docs.map((document) {
-                              final Coin coin = futureSnapshot.data.firstWhere(
-                                  (coin) =>
+                              final Coin tempCoin = futureSnapshot.data
+                                  .firstWhere((coin) =>
                                       coin.name ==
                                       document.id.replaceAll('-', ' '));
                               return Container(
@@ -246,7 +257,7 @@ class PortfolioScreen extends StatelessWidget {
                                     quantity: document['Quantity'].toString(),
                                     totalInvested:
                                         document['TotalInvested'].toString(),
-                                    coin: coin,
+                                    coin: tempCoin,
                                   ),
                                 ),
                               );
