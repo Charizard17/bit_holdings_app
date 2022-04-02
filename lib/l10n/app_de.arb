@@ -14,6 +14,8 @@
     "forgotPasswordText": "Erhalten Sie eine E-Mail, um Ihr Passwort zurückzusetzen",
     "resetPassword": "Passwort zurücksetzen",
     "resetPasswordEmailSent": "E-Mail zum Zurücksetzen des Passworts gesendet",
+    "emailValidationText": "Eine gültige E-Mail-Adresse eingeben",
+    "passwordValidationText": "Muss mindestens 8 Zeichen lang sein",
     "or": "ODER",
     "signInWithGoogle": "Anmeldung mit Google",
     "dontHaveAnAccount": "Haben Sie kein Konto?",

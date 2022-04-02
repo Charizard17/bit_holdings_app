@@ -280,7 +280,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                                 child: TextField(
                                   controller: _quantity,
                                   decoration: InputDecoration(
-                                    hintText: '0.35',
+                                    hintText: '0.00',
                                     hintStyle:
                                         Theme.of(context).textTheme.bodyLarge,
                                     focusedBorder: UnderlineInputBorder(
