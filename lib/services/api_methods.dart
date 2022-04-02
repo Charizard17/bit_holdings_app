@@ -23,7 +23,7 @@ class ApiMethods {
   Future<List<Coin>> getCoinsList() async {
     try {
       var url = Uri.parse(
-          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1');
+          'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1');
       var response = await http.get(url);
       var json = jsonDecode(response.body);
       List<Coin> _coinsList = [];
