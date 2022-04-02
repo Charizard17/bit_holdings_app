@@ -37,6 +37,7 @@
     "txDate": "Transaction Date",
     "add": "Add",
     "deleteTx": "Delete Tx",
+    "editTx": "Edit Tx",
     "price": "Price",
     "h24": "24h"
 }

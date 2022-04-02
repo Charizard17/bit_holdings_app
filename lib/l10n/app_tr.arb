@@ -37,6 +37,7 @@
     "txDate": "İşlem Tarihi",
     "add": "Ekle",
     "deleteTx": "İşlemi Sil",
+    "editTx": "İşlemi Düzenle",
     "price": "Fiyat",
     "h24": "24s"
 }

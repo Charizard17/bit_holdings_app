@@ -245,6 +245,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                                           color: Colors.red,
                                         ),
                                         onPressed: () async {
+                                          _portfolioCoinsList = [];
                                           await _flutterFire
                                               .deleteCoin(document.id);
                                         },
