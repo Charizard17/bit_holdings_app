@@ -23,6 +23,16 @@ class FlutterFire {
     }
   }
 
+  Future<bool> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
   Future<bool> signUp(String email, String password) async {
     try {
       await FirebaseAuth.instance

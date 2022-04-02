@@ -1,8 +1,9 @@
-import 'package:bit_holdings_app/screens/main_view.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'main_view.dart';
+import 'forgot_password_screen.dart';
 import 'sign_up_screen.dart';
 import '../services/flutterfire.dart';
 
@@ -93,7 +94,23 @@ class _SignInScreenState extends State<SignInScreen> {
                 }
               },
             ),
-            // SizedBox(height: 20),
+            SizedBox(height: 20),
+            TextButton(
+              child: Text(
+                appLocalizationsContext.forgotPassword,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).focusColor,
+                    ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        const ForgotPasswordScreen(),
+                  ),
+                );
+              },
+            ),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.center,
             //   children: [
@@ -141,7 +158,8 @@ class _SignInScreenState extends State<SignInScreen> {
               text: TextSpan(
                 style: Theme.of(context).textTheme.bodySmall,
                 children: [
-                  TextSpan(text: "${appLocalizationsContext.dontHaveAnAccount} "),
+                  TextSpan(
+                      text: "${appLocalizationsContext.dontHaveAnAccount} "),
                   TextSpan(
                     text: appLocalizationsContext.signUp,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
