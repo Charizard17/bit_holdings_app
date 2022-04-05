@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
+import 'providers/currency_provider.dart';
 import 'screens/main_view.dart';
 import 'screens/sign_in_screen.dart';
 import 'l10n/l10n.dart';
@@ -27,6 +28,8 @@ void main() async {
                 create: (_) => ThemeProvider()),
             ChangeNotifierProvider<LocaleProvider>(
                 create: (_) => LocaleProvider()),
+            ChangeNotifierProvider<CurrencyProvider>(
+                create: (_) => CurrencyProvider()),
           ],
           child: MyApp(),
         ),
