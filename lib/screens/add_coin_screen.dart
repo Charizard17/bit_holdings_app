@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../models/coin.dart';
 import '../services/flutterfire.dart';
 import '../services/api_methods.dart';
+import '../providers/currency_provider.dart';
 
 FlutterFire _flutterFire = FlutterFire();
 ApiMethods _apiMethods = ApiMethods();
@@ -33,6 +35,7 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
   Widget build(BuildContext context) {
     final appLocalizationsContext = AppLocalizations.of(context)!;
     final formatCurrency = new NumberFormat.simpleCurrency();
+    final currencyProvider = Provider.of<CurrencyProvider>(context);
 
     Future<void> _selectDate(BuildContext context) async {
       DateTime? selectedDate = await showDatePicker(
@@ -114,7 +117,8 @@ class _AddCoinScreenState extends State<AddCoinScreen> {
                 _coinSelected == false
                     ? Expanded(
                         child: FutureBuilder(
-                          future: _apiMethods.getCoinsList(),
+                          future: _apiMethods
+                              .getCoinsList(currencyProvider.currency),
                           builder:
                               (BuildContext context, AsyncSnapshot snapshot) {
                             if (!snapshot.hasData) {

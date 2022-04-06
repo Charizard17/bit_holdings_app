@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/coins_list_item.dart';
 import '../services/api_methods.dart';
+import '../providers/currency_provider.dart';
 
 ApiMethods _apiMethods = ApiMethods();
 
@@ -12,6 +14,7 @@ class CoinsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocalizationsContext = AppLocalizations.of(context)!;
+    final currencyProvider = Provider.of<CurrencyProvider>(context);
 
     return SafeArea(
       child: Container(
@@ -65,7 +68,7 @@ class CoinsListScreen extends StatelessWidget {
               SizedBox(height: 5),
               Expanded(
                 child: FutureBuilder(
-                  future: _apiMethods.getCoinsList(),
+                  future: _apiMethods.getCoinsList(currencyProvider.currency),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (!snapshot.hasData) {
                       return Center(

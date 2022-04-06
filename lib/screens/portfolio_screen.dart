@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
+import 'add_coin_screen.dart';
 import '../services/api_methods.dart';
 import '../services/flutterfire.dart';
 import '../widgets/portfolio_list_item.dart';
-import 'add_coin_screen.dart';
+import '../providers/currency_provider.dart';
 import '../models/coin.dart';
 import '../widgets/total_portfolio_info.dart';
 
@@ -27,6 +29,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   @override
   Widget build(BuildContext context) {
     final appLocalizationsContext = AppLocalizations.of(context)!;
+    final currencyProvider = Provider.of<CurrencyProvider>(context);
 
     return SafeArea(
       child: Container(
@@ -38,7 +41,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           child: Column(
             children: [
               FutureBuilder(
-                future: _apiMethods.getCoinsList(),
+                future: _apiMethods.getCoinsList(currencyProvider.currency),
                 builder: (BuildContext context, AsyncSnapshot futureSnapshot) {
                   if (!futureSnapshot.hasData) {
                     return Center(
@@ -176,7 +179,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               ),
               Expanded(
                 child: FutureBuilder(
-                  future: _apiMethods.getCoinsList(),
+                  future: _apiMethods.getCoinsList(currencyProvider.currency),
                   builder:
                       (BuildContext context, AsyncSnapshot futureSnapshot) {
                     if (!futureSnapshot.hasData) {
