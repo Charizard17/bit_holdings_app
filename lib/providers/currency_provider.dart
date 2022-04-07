@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CurrencyProvider extends ChangeNotifier {
-  String _currency = 'usd';
+  String currency = 'USD';
 
-  String get currency => _currency;
-
-  void setCurrency(String currency) {
-    if (_currency != currency) {
-      _currency = currency;
+  void setCurrency(String value) {
+    if (currency != value) {
+      currency = value;
     }
     notifyListeners();
   }

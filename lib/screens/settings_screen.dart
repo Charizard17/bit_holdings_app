@@ -6,6 +6,7 @@ import 'sign_in_screen.dart';
 import 'delete_account_screen.dart';
 import '../providers/locale_provider.dart';
 import '../providers/theme_provider.dart';
+import '../providers/currency_provider.dart';
 import '../services/flutterfire.dart';
 
 FlutterFire _flutterFire = FlutterFire();
@@ -25,6 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final appLocalizationsContext = AppLocalizations.of(context)!;
     final themeProvider = Provider.of<ThemeProvider>(context);
     final localeProvider = Provider.of<LocaleProvider>(context);
+    final currencyProvider = Provider.of<CurrencyProvider>(context);
 
     return SafeArea(
       child: Container(
@@ -143,26 +145,59 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          appLocalizationsContext.currency,
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          '${appLocalizationsContext.currency} (${currencyProvider.currency == 'TRY' ? '₺' : currencyProvider.currency == 'EUR' ? '€' : '\$'})',
+                          style: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .fontSize,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium!.color,
+                            fontFamily: 'Roboto',
+                          ),
                         ),
                         DropdownButton<String>(
-                          value: currencyDropdownValue,
-                          icon: const Icon(Icons.arrow_downward),
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          value: currencyProvider.currency,
+                          icon: Icon(Icons.arrow_downward),
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .fontSize,
+                          ),
                           dropdownColor: Theme.of(context).primaryColorLight,
                           underline: Container(
                             height: 1,
                           ),
-                          onChanged: null,
-                          items: <String>['USD', 'EUR', 'GBP']
-                              .map<DropdownMenuItem<String>>((String value) {
+                          onChanged: (newValue) {
+                            currencyProvider.setCurrency(newValue!);
+                            setState(() {});
+                          },
+                          items: <String>[
+                            'USD',
+                            'EUR',
+                            'TRY',
+                          ].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(
                                 value,
                                 style: Theme.of(context).textTheme.bodyMedium,
                               ),
+                              onTap: () {
+                                var currency = 'USD';
+                                if (value == 'USD') {
+                                  currency = value;
+                                }
+                                if (value == 'EUR') {
+                                  currency = value;
+                                }
+                                if (value == 'TRY') {
+                                  currency = value;
+                                }
+                                currencyProvider.setCurrency(currency);
+                              },
                             );
                           }).toList(),
                         ),
