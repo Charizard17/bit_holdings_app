@@ -139,65 +139,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       color: Theme.of(context).textTheme.bodyMedium!.color,
                       thickness: 1,
                     ),
-                    Stack(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              appLocalizationsContext.currency,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            DropdownButton<String>(
-                              value: currencyDropdownValue,
-                              icon: const Icon(Icons.arrow_downward),
-                              style: Theme.of(context).textTheme.bodyMedium,
-                              dropdownColor:
-                                  Theme.of(context).primaryColorLight,
-                              underline: Container(
-                                height: 1,
-                              ),
-                              onChanged: null,
-                              // onChanged: (String? newValue) {
-                              //   setState(() {
-                              //     currencyDropdownValue = newValue!;
-                              //   });
-                              // },
-                              items: <String>[
-                                'USD',
-                                'EUR',
-                                'GBP'
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ],
+                        Text(
+                          appLocalizationsContext.currency,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
-                        Positioned(
-                          top: 15,
-                          right: 0,
-                          child: RotationTransition(
-                            turns: AlwaysStoppedAnimation(30 / 360),
-                            child: Container(
-                              color:
-                                  Theme.of(context).errorColor.withOpacity(0.5),
-                              child: Text(
-                                'Coming soon',
-                                style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
+                        DropdownButton<String>(
+                          value: currencyDropdownValue,
+                          icon: const Icon(Icons.arrow_downward),
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          dropdownColor: Theme.of(context).primaryColorLight,
+                          underline: Container(
+                            height: 1,
                           ),
+                          onChanged: null,
+                          items: <String>['USD', 'EUR', 'GBP']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            );
+                          }).toList(),
                         ),
                       ],
                     ),
@@ -216,16 +183,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                   ),
                   onPressed: () async {
-                    // await _flutterFire.deleteUser();
-                    // bool shouldNavigate = await _flutterFire.deleteUser();
-                    // if (shouldNavigate == true) {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
                         builder: (BuildContext context) =>
                             DeleteAccountScreen(),
                       ),
                     );
-                    // }
                   },
                 ),
               ),
