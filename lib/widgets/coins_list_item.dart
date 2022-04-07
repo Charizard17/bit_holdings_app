@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/currency_provider.dart';
 
 class CoinsListItem extends StatelessWidget {
   final String rank;
@@ -21,6 +24,7 @@ class CoinsListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formatCurrency = new NumberFormat.simpleCurrency();
+    final currencyProvider = Provider.of<CurrencyProvider>(context);
 
     return Container(
       margin: const EdgeInsets.only(
@@ -83,10 +87,12 @@ class CoinsListItem extends StatelessWidget {
               alignment: Alignment.centerRight,
               fit: BoxFit.scaleDown,
               child: Text(
-                double.parse(price) < 0.1
-                    ? '\$${price}'
-                    : '${formatCurrency.format(double.parse(price))}',
-                style: Theme.of(context).textTheme.bodyMedium,
+                '${currencyProvider.currency == 'TRY' ? '₺' : currencyProvider.currency == 'EUR' ? '€' : '\$'} ${price}',
+                style: TextStyle(
+                  fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
+                  color: Theme.of(context).textTheme.bodyMedium!.color,
+                  fontFamily: 'Roboto',
+                ),
                 textAlign: TextAlign.right,
               ),
             ),
