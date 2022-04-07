@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/currency_provider.dart';
@@ -23,7 +22,6 @@ class CoinsListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatCurrency = new NumberFormat.simpleCurrency();
     final currencyProvider = Provider.of<CurrencyProvider>(context);
 
     return Container(

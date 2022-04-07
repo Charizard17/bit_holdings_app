@@ -86,9 +86,13 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                               .add(document.id.replaceAll('-', ' '));
                         });
 
+                        final Coin tempTether = futureSnapshot.data
+                            .firstWhere((coin) => coin.name == 'Tether');
+
                         return TotalPortfolioInfo(
                           totalInvested: totalInvested.toStringAsFixed(2),
                           currentValue: currentValue.toStringAsFixed(2),
+                          usdtPrice: tempTether.price,
                         );
                       },
                     ),
@@ -207,6 +211,9 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                             );
                           }
 
+                          final Coin tempTether = futureSnapshot.data
+                              .firstWhere((coin) => coin.name == 'Tether');
+
                           return ListView(
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
@@ -262,6 +269,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                                     totalInvested:
                                         document['TotalInvested'].toString(),
                                     coin: tempCoin,
+                                    usdtPrice: tempTether.price,
                                   ),
                                 ),
                               );

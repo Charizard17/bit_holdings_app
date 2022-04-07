@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/currency_provider.dart';
 
 class TotalPortfolioInfo extends StatelessWidget {
   final String totalInvested;
   final String currentValue;
+  final String usdtPrice;
   const TotalPortfolioInfo({
     Key? key,
     required this.totalInvested,
     required this.currentValue,
+    required this.usdtPrice,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final appLocalizationsContext = AppLocalizations.of(context)!;
-    final formatCurrency = new NumberFormat.simpleCurrency();
+    final currencyProvider = Provider.of<CurrencyProvider>(context);
 
     return Container(
       width: double.infinity,
@@ -43,7 +48,7 @@ class TotalPortfolioInfo extends StatelessWidget {
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
-                      '%${((double.parse(currentValue) - double.parse(totalInvested)) / double.parse(totalInvested) * 100).toStringAsFixed(2)}',
+                      '%${((double.parse(currentValue) - double.parse(totalInvested) * double.parse(usdtPrice)) / (double.parse(totalInvested) * double.parse(usdtPrice)) * 100).toStringAsFixed(2)}',
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
@@ -65,8 +70,13 @@ class TotalPortfolioInfo extends StatelessWidget {
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
-                      '${formatCurrency.format(double.parse(totalInvested))}',
-                      style: Theme.of(context).textTheme.titleSmall,
+                      '${currencyProvider.currency == 'TRY' ? '₺' : currencyProvider.currency == 'EUR' ? '€' : '\$'} ${(double.parse(totalInvested) * double.parse(usdtPrice)).toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize:
+                            Theme.of(context).textTheme.titleSmall!.fontSize,
+                        color: Theme.of(context).textTheme.titleSmall!.color,
+                      ),
                     ),
                   ),
                 ],
@@ -81,8 +91,13 @@ class TotalPortfolioInfo extends StatelessWidget {
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
-                      '${formatCurrency.format(double.parse(currentValue))}',
-                      style: Theme.of(context).textTheme.titleSmall,
+                      '${currencyProvider.currency == 'TRY' ? '₺' : currencyProvider.currency == 'EUR' ? '€' : '\$'} ${(double.parse(currentValue)).toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize:
+                            Theme.of(context).textTheme.titleSmall!.fontSize,
+                        color: Theme.of(context).textTheme.titleSmall!.color,
+                      ),
                     ),
                   ),
                 ],
