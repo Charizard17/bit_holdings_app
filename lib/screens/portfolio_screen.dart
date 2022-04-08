@@ -234,6 +234,34 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                                   ),
                                 ),
                                 child: Slidable(
+                                  startActionPane: ActionPane(
+                                    motion: ScrollMotion(),
+                                    children: [
+                                      OutlinedButton.icon(
+                                        style: OutlinedButton.styleFrom(
+                                          side: BorderSide(
+                                            width: 2.0,
+                                            color: Theme.of(context).focusColor,
+                                          ),
+                                        ),
+                                        label: Text(
+                                          appLocalizationsContext.editTx,
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              color:
+                                                  Theme.of(context).focusColor),
+                                        ),
+                                        icon: Icon(
+                                          Icons.edit_rounded,
+                                          color: Theme.of(context).focusColor,
+                                        ),
+                                        onPressed: () {
+                                          // TODO
+                                        },
+                                      ),
+                                      Expanded(child: Container()),
+                                    ],
+                                  ),
                                   endActionPane: ActionPane(
                                     motion: ScrollMotion(),
                                     children: [
